@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+<meta charset="utf-8"></meta>
+<title>Ändere Country</title>
+<link rel="stylesheet" href="style.css" th:href="@{/style.css}"></link>
+</head>
+<body>
+
+	<form action=""
+		th:action="@{/countries/editCountry/{id}(id=${country.id})}"
+		th:object="${country}" method="POST" id="${country.id}"
+		enctype="multipart/form-data">
+		<!--  -->
+		<input type="hidden" name="id" th:value="${country.id}"></input><br />
+		<!--  -->
+		<label for="code" th:text="#{country.code}">country</label>
+		<input type="text" th:field="*{code}"></input> <br />
+
+		<!--  -->
+		<label for="name_en" th:text="#{country.name_en}">country</label>
+		<input type="text" th:field="*{name_en}"></input> <br />
+
+		<!--  -->
+		<label for="name_de" th:text="#{country.name_de}">country</label>
+		<input type="text" th:field="*{name_de}"></input> <br />
+
+		<!--  -->
+		<label for="name_fr" th:text="#{country.name_fr}">country</label>
+		<input type="text" th:field="*{name_fr}"></input> <br />
+
+		<!--  -->
+		<button type="submit" th:text="#{save}" />
+	</form>
+</body>
+</html>

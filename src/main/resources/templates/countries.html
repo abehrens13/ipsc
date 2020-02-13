@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+<meta charset="utf-8" />
+<title></title>
+<link href="style.css" th:href="@{/style.css}" rel="stylesheet" />
+</head>
+<body>
+
+	<div class="container-fluid">
+		<div class="page-title">
+			<h2>
+				<span class="fa fa-arrow-circle-o-left">Countries</span>
+			</h2>
+		</div>
+		<div class="row">
+			<table class="table datatable">
+				<thead>
+					<tr>
+						<th th:text="#{country.id}">ID</th>
+						<th th:text="#{country.code}">Name</th>
+						<th th:text="#{country.name_en}">Description</th>
+						<th th:text="#{country.name_de}">Description</th>
+						<th th:text="#{country.name_fr}">Description</th>
+						<th th:text="#{action}">Action</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="country : ${countries}">
+						<td><a href="#"
+							th:href="@{/countries/editCountry/{id}(id=${country.id})}"
+							th:text="${country.id}"></a></td>
+						<td th:text="${country.code}">Text</td>
+						<td th:text="${country.name_en}">Text</td>
+						<td th:text="${country.name_de}">Text</td>
+						<td th:text="${country.name_fr}">Text</td>
+						<td><a href="#"
+							th:href="@{/countries/editCountry/{id}(id=${country.id})}">Edit</a>
+							<a href="#"
+							th:href="@{/countries/deleteCountry/{id}(id=${country.id})}">Delete</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<a href="#" th:href="@{/countries/newCountry}">New
+				Country</a>
+			<!--  -->
+			<a href="#" th:href="@{/competitionTypes}">Competition Types</a>
+			<!--  -->
+			<a href="#" th:href="@{/devisionTypes}">Devision Types</a>
+			<!--  -->
+			<a href="#" th:href="@{/countries}">Countries</a>
+			<!--  -->
+
+
+
+		</div>
+	</div>
+
+</body>
+</html>

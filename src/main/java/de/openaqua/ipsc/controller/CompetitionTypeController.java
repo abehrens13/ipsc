@@ -46,21 +46,10 @@ public class CompetitionTypeController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	@GetMapping("/")
-	public ModelAndView index(@RequestParam("pageSize") Optional<Integer> pageSize,
-			@RequestParam("page") Optional<Integer> page) {
-
+	public ModelAndView index() {
 		ModelAndView modelAndView = new ModelAndView("competitionTypes");
-
-		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
-		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
-		// print repo
-
-		Page<CompetitionType> comps = compsRepository.findAllByOrderByNameAsc(PageRequest.of(evalPage, evalPageSize));
-		Pager pager = new Pager(comps.getTotalPages(), comps.getNumber(), BUTTONS_TO_SHOW);
+		Iterable<CompetitionType> comps = compsRepository.findAllByOrderByNameAsc();
 		modelAndView.addObject("competitionTypes", comps);
-		modelAndView.addObject("selectedPageSize", evalPageSize);
-		modelAndView.addObject("pageSizes", PAGE_SIZES);
-		modelAndView.addObject("pager", pager);
 		return modelAndView;
 
 	}
