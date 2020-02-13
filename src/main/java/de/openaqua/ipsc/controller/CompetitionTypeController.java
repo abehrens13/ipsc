@@ -54,9 +54,9 @@ public class CompetitionTypeController {
 		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 		// print repo
 
-		Page<CompetitionType> units = compsRepository.findAllByOrderByNameAsc(PageRequest.of(evalPage, evalPageSize));
-		Pager pager = new Pager(units.getTotalPages(), units.getNumber(), BUTTONS_TO_SHOW);
-		modelAndView.addObject("units", units);
+		Page<CompetitionType> comps = compsRepository.findAllByOrderByNameAsc(PageRequest.of(evalPage, evalPageSize));
+		Pager pager = new Pager(comps.getTotalPages(), comps.getNumber(), BUTTONS_TO_SHOW);
+		modelAndView.addObject("competitionTypes", comps);
 		modelAndView.addObject("selectedPageSize", evalPageSize);
 		modelAndView.addObject("pageSizes", PAGE_SIZES);
 		modelAndView.addObject("pager", pager);
@@ -67,15 +67,15 @@ public class CompetitionTypeController {
 	@GetMapping("/byId/{id}")
 	public String byId(@PathVariable final long id, final Model model) {
 		LOG.debug("/byId/{id}");
-		model.addAttribute("unit", compsRepository.findById(id));
-		return "units";
+		model.addAttribute("competitionType", compsRepository.findById(id));
+		return "competitionType";
 	}
 
 	@GetMapping("/byName/{name}")
 	public String byId(@PathVariable final String unit, final Model model) {
-		LOG.debug("/byUnit/{unit}");
-		model.addAttribute("unit", compsRepository.findByName(unit));
-		return "units";
+		LOG.debug("/byName/{name}");
+		model.addAttribute("competitionType", compsRepository.findByName(unit));
+		return "competitionType";
 	}
 
 	// delete
@@ -90,7 +90,7 @@ public class CompetitionTypeController {
 	@GetMapping("/newCompetitionType")
 	public String newCompetitionType(final Model model) {
 		LOG.debug("GET /newCompetitionType");
-		model.addAttribute("unit", new CompetitionType());
+		model.addAttribute("competitionType", new CompetitionType());
 		return "competitionTypes/newCompetitionType";
 	}
 

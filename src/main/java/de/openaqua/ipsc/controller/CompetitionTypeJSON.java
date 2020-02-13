@@ -6,11 +6,11 @@ public class CompetitionTypeJSON {
 	private String description;
 	private Long id;
 
-	public CompetitionTypeJSON(String name, String description, Long id) {
+	public CompetitionTypeJSON(Long id, String name, String description) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.id = id;
 	}
 
 	public CompetitionTypeJSON(String name, String description) {

@@ -18,14 +18,14 @@ public class CompetitionType {
 	@Column(name = "id")
 	private Long id;
 
-	public CompetitionType(Long id, @NotNull String name, String description) {
+	public CompetitionType(Long id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 	}
 
-	public CompetitionType(@NotNull String name, String description) {
+	public CompetitionType(String name, String description) {
 		super();
 		this.id = null;
 		this.name = name;

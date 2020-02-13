@@ -4,24 +4,21 @@
 	xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
 <meta charset="utf-8"></meta>
-<title>Ändere Unit ${unit.id} - ${unit.unit}</title>
+<title>Ändere competitionType ${competitionType.id} - ${competitionType.name}</title>
 <link rel="stylesheet" href="style.css" th:href="@{/style.css}"></link>
 </head>
 <body>
 
-	<form action="" th:action="@{/units/editUnit/{id}(id=${unit.id})}"
-		th:object="${unit}" method="POST" id="${unit.id}"
+	<form action="" th:action="@{/competitionTypes/editCompetitionType/{id}(id=${competitionType.id})}"
+		th:object="${competitionType}" method="POST" id="${competitionType.id}"
 		enctype="multipart/form-data">
 		<!--  -->
-		<input type="hidden" name="id" th:value="${unit.id}"></input><br />
+		<input type="hidden" name="id" th:value="${competitionType.id}"></input><br />
 		<!--  -->
-		<label for="unit" th:text="#{unit.unit}">Unit</label> <input
-			type="text" th:field="*{unit}"></input> <br />
+		<label for="name" th:text="#{competitionType.name}">competitionType</label> <input type="text" th:field="*{name}"></input> <br />
 
 		<!--  -->
-		<label for="tocm" th:text="#{unit.tocm}">text</label> <input id="tocm"
-			type="number" min="0.0001" max="100000" step="0.0001"
-			th:field="*{tocm}" /> <br />
+		<label for="description" th:text="#{competitionType.description}">competitionType</label> <input type="text" th:field="*{description}"></input> <br />
 		<!--  -->
 		<button type="submit" th:text="#{save}" />
 	</form>

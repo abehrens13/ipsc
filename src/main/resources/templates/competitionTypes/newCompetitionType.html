@@ -3,24 +3,25 @@
 	xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
 <meta charset="utf-8" />
-<title>Neue Unit</title>
+<title>#{NewCompetitionType}</title>
 <link rel="stylesheet" href="style.css" th:href="@{/style.css}" />
 </head>
 <body>
 
-	<form action="" th:action="@{/units/newUnit}" th:object="${unit}"
-		method="POST">
+	<form action="" th:action="@{/competitionTypes/newCompetitionType}"
+		th:object="${competitionType}" method="POST">
 		<!--  -->
 
-		<!--  -->
-		<label for="unit" th:text="#{unit.unit}">Unit</label> <input
-			type="text" th:field="*{unit}"></input> <br />
+		<label for="name" th:text="#{competitionType.name}">competitionType</label>
+		<input id="name" type="text" th:field="*{name}"></input> <br />
 
 		<!--  -->
-		<label for="tocm" th:text="#{unit.tocm}">text</label> <input id="tocm"
-			type="number" min="0.0001" max="100000" step="0.0001"
-			th:field="*{tocm}" /> <br />
+
+		<label for="description" th:text="#{competitionType.description}">competitionType</label>
+		<input id="description" type="text" th:field="*{description}"></input>
+		<br />
 		<!--  -->
+
 		<button type="submit" th:text="#{save}" />
 	</form>
 
