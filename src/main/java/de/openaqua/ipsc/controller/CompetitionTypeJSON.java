@@ -1,25 +1,25 @@
 package de.openaqua.ipsc.controller;
 
-public class CompetitionJSON {
+public class CompetitionTypeJSON {
 
 	private String name;
 	private String description;
 	private Long id;
 
-	public CompetitionJSON(String name, String description, Long id) {
+	public CompetitionTypeJSON(String name, String description, Long id) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.id = id;
 	}
 
-	public CompetitionJSON(String name, String description) {
+	public CompetitionTypeJSON(String name, String description) {
 		super();
 		this.name = name;
 		this.description = description;
 	}
 
-	public CompetitionJSON() {
+	public CompetitionTypeJSON() {
 		super();
 	}
 

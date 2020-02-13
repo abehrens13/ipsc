@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "competition_type")
-public class Competition {
+public class CompetitionType {
 //	private static final Log LOG = LogFactory.getLog(Competition.class);
 
 	@Id
@@ -18,21 +18,21 @@ public class Competition {
 	@Column(name = "id")
 	private Long id;
 
-	public Competition(Long id, @NotNull String name, String description) {
+	public CompetitionType(Long id, @NotNull String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 	}
 
-	public Competition(@NotNull String name, String description) {
+	public CompetitionType(@NotNull String name, String description) {
 		super();
 		this.id = null;
 		this.name = name;
 		this.description = description;
 	}
 
-	public Competition() {
+	public CompetitionType() {
 		super();
 		this.id = null;
 		this.name = null;
