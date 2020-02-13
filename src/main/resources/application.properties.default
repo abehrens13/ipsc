@@ -1,0 +1,35 @@
+#spring.output.ansi.enabled=ALWAYS
+logging.level.de.springbootbuch = DEBUG
+logging.pattern.console=%clr(%-5p) %clr(${PID}){faint} %clr(---){faint} %clr([%8.10t]){cyan} %clr(%-40.40logger{0}){blue} %clr(:){red} %clr(%m){faint}%n
+endpoints.loggers.web.enabled = true
+
+##Basic Spring Boot Config for Oracle
+#spring.datasource.url =jdbc:postgresql://localhost:5432/database
+spring.datasource.url =jdbc:postgresql://kandula.db.elephantsql.com:5432/sample
+spring.datasource.username = username
+spring.datasource.password = password
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.test.database.replace = NONE
+
+#basic hibernate config
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+#spring.jpa.database-platform=org.hibernate.dialect.Oracle10gDialect
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=false
+spring.jpa.hibernate.ddl-auto=none
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE 
+
+
+#Basic Spring Config fuer H2 im Oracle-Modus
+#spring.profiles.active=h2
+#spring.datasource.url=jdbc:h2:mem:testdb;Mode=Oracle
+#spring.datasource.platform=h2
+#spring.jpa.hibernate.ddl-auto=none
+#spring.datasource.continue-on-error=true
+
+spring.mvc.content-negotiation.media-types.atom = application/atom+xml
+spring.mvc.content-negotiation.media-types.csv = text/csv
+spring.resources.chain.strategy.content.enabled = true
+spring.resources.chain.strategy.content.paths=/**
+spring.mvc.contentnegotiation.favor-parameter=true

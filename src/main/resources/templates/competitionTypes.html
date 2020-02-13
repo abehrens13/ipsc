@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+<meta charset="utf-8" />
+<title></title>
+<link href="style.css" th:href="@{/style.css}" rel="stylesheet" />
+</head>
+<body>
+
+	<div class="container-fluid">
+		<div class="page-title">
+			<h2>
+				<span class="fa fa-arrow-circle-o-left">Einheiten</span>
+			</h2>
+		</div>
+		<!-- END PAGE TITLE -->
+		<div class="row">
+			<table class="table datatable">
+				<thead>
+					<tr>
+						<th th:text="#{competitionType.id}">ID</th>
+						<th th:text="#{competitionType.name}">Name</th>
+						<th th:text="#{competitionType.description}">tocm</th>
+						<th th:text="#{action}">Aktion</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="unit : {competition}">
+						<td><a href="#"
+							th:href="@{/units/editUnit/{id}(id=${unit.id})}"
+							th:text="${unit.id}"></a></td>
+						<td th:text="${unit.name}">Text</td>
+						<td th:text="${unit.description}">Text</td>
+						<td><a href="#"
+							th:href="@{/units/editUnit/{id}(id=${unit.id})}">Edit</a> <a
+							href="#" th:href="@{/units/deleteUnit/{id}(id=${unit.id})}">Delete</a>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+			<a href="#" th:href="@{/units/newUnit}">Neue Unit</a> <a href="#"
+				th:href="@{/units}">Unit-Liste</a> <a href="#"
+				th:href="@{/calibers}">Kaliber</a>
+				<a href="#" th:href="@{/weapons}">Waffen</a>
+
+			<div class="row">
+				<div class="form-group col-md-1">
+					<select class="form-control pagination" id="pageSizeSelect">
+						<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
+							th:value="${pageSize}"
+							th:selected="${pageSize} == ${selectedPageSize}"></option>
+					</select>
+				</div>
+				<div th:if="${units.totalPages != 1}"
+					class="form-group col-md-11 pagination-centered">
+
+					<ul class="pagination">
+						<li th:class="${units.number == 0} ? disabled"><a
+							class="pageLink"
+							th:href="@{/units/(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+						</li>
+						<li th:class="${units.number == 0} ? disabled"><a
+							class="pageLink"
+							th:href="@{/units/(pageSize=${selectedPageSize}, page=${units.number})}">&larr;</a>
+						</li>
+						<li
+							th:class="${units.number == (page - 1)} ? 'active pointer-disabled'"
+							th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+							<a class="pageLink"
+							th:href="@{/units/(pageSize=${selectedPageSize}, page=${page})}"
+							th:text="${page}"></a>
+						</li>
+						<li th:class="${units.number + 1 == units.totalPages} ? disabled">
+							<a class="pageLink"
+							th:href="@{/units/(pageSize=${selectedPageSize}, page=${units.number + 2})}">&rarr;</a>
+						</li>
+						<li th:class="${units.number + 1 == units.totalPages} ? disabled">
+							<a class="pageLink"
+							th:href="@{/units/(pageSize=${selectedPageSize}, page=${units.totalPages})}">&raquo;</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"
+		integrity="sha256-VAvG3sHdS5LqTT+5A/aeq/bZGa/Uj04xKxY8KM/w9EE="
+		crossorigin="anonymous"></script>
+
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+		crossorigin="anonymous"></script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		$(document).ready(function() {
+			changePageAndSize();
+		});
+
+		function changePageAndSize() {
+			$('#pageSizeSelect').change(
+					function(evt) {
+						window.location.replace("/units/?pageSize="
+								+ this.value + "&page=1");
+					});
+		}
+		/*]]>*/
+	</script>
+
+
+</body>
+</html>

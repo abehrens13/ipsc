@@ -1,0 +1,31 @@
+body {
+    font-family: sans-serif;
+}
+
+img.cover {
+    max-width:80px
+}
+
+h1 {}	
+h2 {
+  color: darkred;
+  padding-left: 1em;
+}
+h3 {
+  color: red;
+  padding-left: 2em;
+}
+h4 {
+  color: salmon;
+  padding-left: 3em;  
+}
+
+tbody tr:nth-child(even) td { 
+  background-color: #e4ebf2; 
+  color: #000; 
+}
+
+th[scope=row] { 
+  color: #c32e04;
+  text-align: right; 
+}

@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+<meta charset="utf-8"></meta>
+<title>Ändere Unit ${unit.id} - ${unit.unit}</title>
+<link rel="stylesheet" href="style.css" th:href="@{/style.css}"></link>
+</head>
+<body>
+
+	<form action="" th:action="@{/units/editUnit/{id}(id=${unit.id})}"
+		th:object="${unit}" method="POST" id="${unit.id}"
+		enctype="multipart/form-data">
+		<!--  -->
+		<input type="hidden" name="id" th:value="${unit.id}"></input><br />
+		<!--  -->
+		<label for="unit" th:text="#{unit.unit}">Unit</label> <input
+			type="text" th:field="*{unit}"></input> <br />
+
+		<!--  -->
+		<label for="tocm" th:text="#{unit.tocm}">text</label> <input id="tocm"
+			type="number" min="0.0001" max="100000" step="0.0001"
+			th:field="*{tocm}" /> <br />
+		<!--  -->
+		<button type="submit" th:text="#{save}" />
+	</form>
+</body>
+</html>

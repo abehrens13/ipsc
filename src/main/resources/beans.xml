@@ -1,0 +1,15 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+<bean name="serialGeneratorCompetion" class="de.springbootbuch.helloworld.beans.SerialGenerator"> 
+	<property name="prefix" value="COMP" /> 
+	<property name="number" value="5000" /> 
+</bean>
+<bean name="serialGeneratorShooter" class="de.springbootbuch.helloworld.beans.SerialGenerator"> 
+	<property name="prefix" value="SHOOT" /> 
+	<property name="number" value="10000" /> 
+</bean>
+
+</beans> 
