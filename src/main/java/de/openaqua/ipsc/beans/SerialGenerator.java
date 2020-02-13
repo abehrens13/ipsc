@@ -3,6 +3,7 @@ package de.openaqua.ipsc.beans;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+
 public class SerialGenerator {
 	private static final Log LOG = LogFactory.getLog(SerialGenerator.class);
 	private int number;
@@ -11,7 +12,7 @@ public class SerialGenerator {
 	public SerialGenerator() {
 		super();
 		this.prefix = "";
-		this.number = 1;
+		this.number = 0;
 	}
 
 	public SerialGenerator(String prefix, int number) {
