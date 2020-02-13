@@ -18,30 +18,30 @@
 			<table class="table datatable">
 				<thead>
 					<tr>
-						<th th:text="#{competitionType.id}">ID</th>
-						<th th:text="#{competitionType.name}">Name</th>
-						<th th:text="#{competitionType.description}">Description</th>
+						<th th:text="#{devisionType.id}">ID</th>
+						<th th:text="#{devisionType.name}">Name</th>
+						<th th:text="#{devisionType.description}">Description</th>
 						<th th:text="#{action}">Action</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<tr th:each="competitionType : ${competitionTypes}">
+					<tr th:each="devisionType : ${devisionTypes}">
 						<td><a href="#"
-							th:href="@{/competitionTypes/editCompetitionType/{id}(id=${competitionType.id})}"
-							th:text="${competitionType.id}"></a></td>
-						<td th:text="${competitionType.name}">Text</td>
-						<td th:text="${competitionType.description}">Text</td>
+							th:href="@{/devisionTypes/editDevisionType/{id}(id=${devisionType.id})}"
+							th:text="${devisionType.id}"></a></td>
+						<td th:text="${devisionType.name}">Text</td>
+						<td th:text="${devisionType.description}">Text</td>
 						<td><a href="#"
-							th:href="@{/competitionTypes/editCompetitionType/{id}(id=${competitionType.id})}">Edit</a>
+							th:href="@{/devisionTypes/editDevisionType/{id}(id=${devisionType.id})}">Edit</a>
 							<a href="#"
-							th:href="@{/competitionTypes/deleteCompetitionType/{id}(id=${competitionType.id})}">Delete</a>
+							th:href="@{/devisionTypes/deleteDevisionType/{id}(id=${devisionType.id})}">Delete</a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			<a href="#" th:href="@{/competitionTypes/newCompetitionType}">New
-				Competition Type</a>
+			<a href="#" th:href="@{/devisionTypes/newDevisionType}">New
+				Devision Type</a>
 			<!--  -->
 			<a href="#" th:href="@{/competitionTypes}">Competition Types</a>
 			<!--  -->

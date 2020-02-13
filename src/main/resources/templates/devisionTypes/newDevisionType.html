@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+<meta charset="utf-8" />
+<title>#{NewDevisionType}</title>
+<link rel="stylesheet" href="style.css" th:href="@{/style.css}" />
+</head>
+<body>
+
+	<form action="" th:action="@{/devisionTypes/newDevisionType}"
+		th:object="${devisionType}" method="POST">
+		<!--  -->
+
+		<label for="name" th:text="#{devisionType.name}">devisionType</label>
+		<input id="name" type="text" th:field="*{name}"></input> <br />
+
+		<!--  -->
+
+		<label for="description" th:text="#{devisionType.description}">devisionType</label>
+		<input id="description" type="text" th:field="*{description}"></input>
+		<br />
+		<!--  -->
+
+		<button type="submit" th:text="#{save}" />
+	</form>
+
+</body>
+</html>

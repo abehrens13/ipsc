@@ -22,14 +22,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import de.openaqua.ipsc.beans.SerialGenerator;
-import de.openaqua.ipsc.entities.CompetitionType;
-import de.openaqua.ipsc.entities.CompetitionTypeJSON;
-import de.openaqua.ipsc.reps.CompetitionTypeRepository;
+import de.openaqua.ipsc.entities.DevisionType;
+import de.openaqua.ipsc.entities.DevisionTypeJSON;
+import de.openaqua.ipsc.reps.DevisionTypeRepository;
 
 @Controller
-@RequestMapping(path = "/competitionTypes")
-public class CompetitionTypeController {
-	private static final Log LOG = LogFactory.getLog(CompetitionTypeController.class);
+@RequestMapping(path = "/devisionTypes")
+public class DevisionTypeController {
+	private static final Log LOG = LogFactory.getLog(DevisionTypeController.class);
 	private static final int BUTTONS_TO_SHOW = 3;
 	private static final int INITIAL_PAGE = 0;
 	private static final int INITIAL_PAGE_SIZE = 5;
@@ -42,22 +42,22 @@ public class CompetitionTypeController {
 	SerialGenerator serialGenerator;
 
 	@Autowired
-	CompetitionTypeRepository compsRepository;
+	DevisionTypeRepository compsRepository;
 
 	@RequestMapping(method = RequestMethod.GET)
 	@GetMapping("/")
 	public ModelAndView index(@RequestParam("pageSize") Optional<Integer> pageSize,
 			@RequestParam("page") Optional<Integer> page) {
 
-		ModelAndView modelAndView = new ModelAndView("competitionTypes");
+		ModelAndView modelAndView = new ModelAndView("devisionTypes");
 
 		int evalPageSize = pageSize.orElse(INITIAL_PAGE_SIZE);
 		int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 		// print repo
 
-		Page<CompetitionType> comps = compsRepository.findAllByOrderByNameAsc(PageRequest.of(evalPage, evalPageSize));
+		Page<DevisionType> comps = compsRepository.findAllByOrderByNameAsc(PageRequest.of(evalPage, evalPageSize));
 		Pager pager = new Pager(comps.getTotalPages(), comps.getNumber(), BUTTONS_TO_SHOW);
-		modelAndView.addObject("competitionTypes", comps);
+		modelAndView.addObject("devisionTypes", comps);
 		modelAndView.addObject("selectedPageSize", evalPageSize);
 		modelAndView.addObject("pageSizes", PAGE_SIZES);
 		modelAndView.addObject("pager", pager);
@@ -68,64 +68,64 @@ public class CompetitionTypeController {
 	@GetMapping("/byId/{id}")
 	public String byId(@PathVariable final long id, final Model model) {
 		LOG.debug("/byId/{id}");
-		model.addAttribute("competitionType", compsRepository.findById(id));
-		return "competitionType";
+		model.addAttribute("devisionType", compsRepository.findById(id));
+		return "devisionType";
 	}
 
 	@GetMapping("/byName/{name}")
 	public String byId(@PathVariable final String unit, final Model model) {
 		LOG.debug("/byName/{name}");
-		model.addAttribute("competitionType", compsRepository.findByName(unit));
-		return "competitionType";
+		model.addAttribute("devisionType", compsRepository.findByName(unit));
+		return "devisionType";
 	}
 
 	// delete
-	@GetMapping("/deleteCompetitionType/{id}")
-	public String editCompetitionType(@PathVariable final long id) {
-		LOG.debug("/deleteCompetitionType " + id);
+	@GetMapping("/deleteDevisionType/{id}")
+	public String editDevisionType(@PathVariable final long id) {
+		LOG.debug("/deleteDevisionType " + id);
 		compsRepository.deleteById(id);
-		return "redirect:/competitionTypes";
+		return "redirect:/devisionTypes";
 	}
 
 	// New
-	@GetMapping("/newCompetitionType")
-	public String newCompetitionType(final Model model) {
-		LOG.debug("GET /newCompetitionType");
-		model.addAttribute("competitionType", new CompetitionType());
-		return "competitionTypes/newCompetitionType";
+	@GetMapping("/newDevisionType")
+	public String newDevisionType(final Model model) {
+		LOG.debug("GET /newDevisionType");
+		model.addAttribute("devisionType", new DevisionType());
+		return "devisionTypes/newDevisionType";
 	}
 
-	@PostMapping(path = "/newCompetitionType")
-	public String newCompetitionType(@Valid CompetitionTypeJSON unit, BindingResult bindingResult, final Model model) {
-		LOG.debug("POST /newCompetitionType");
-		CompetitionType u = new CompetitionType();
+	@PostMapping(path = "/newDevisionType")
+	public String newDevisionType(@Valid DevisionTypeJSON unit, BindingResult bindingResult, final Model model) {
+		LOG.debug("POST /newDevisionType");
+		DevisionType u = new DevisionType();
 		u.setDescription(unit.getDescription());
 		u.setName(unit.getName());
 		u.setId(unit.getId());
 		compsRepository.save(u);
-		return "redirect:/competitionTypes";
+		return "redirect:/devisionTypes";
 	}
 
 	// Edit
-	@GetMapping("/editCompetitionType/{id}")
-	public String editCompetitionType(@PathVariable final long id, final Model model) {
-		LOG.debug("/editCompetitionType");
-		CompetitionType b = compsRepository.findById(id);
-		model.addAttribute("competitionType", b);
-		return "competitionTypes/editCompetitionType";
+	@GetMapping("/editDevisionType/{id}")
+	public String editDevisionType(@PathVariable final long id, final Model model) {
+		LOG.debug("/editDevisionType");
+		DevisionType b = compsRepository.findById(id);
+		model.addAttribute("devisionType", b);
+		return "devisionTypes/editDevisionType";
 	}
 
-	@PostMapping("/editCompetitionType/{id}")
-	public String editCompetitionType(@PathVariable final long id, @Valid CompetitionTypeJSON b, BindingResult bindingResult,
+	@PostMapping("/editDevisionType/{id}")
+	public String editDevisionType(@PathVariable final long id, @Valid DevisionTypeJSON b, BindingResult bindingResult,
 			final Model model) {
-		LOG.debug("/editCompetitionType");
+		LOG.debug("/editDevisionType");
 
-		CompetitionType u = compsRepository.findById(id);
+		DevisionType u = compsRepository.findById(id);
 		u.setDescription(b.getDescription());
 		u.setName(b.getName());
 		u.setId(b.getId());
 		compsRepository.save(u);
-		return "redirect:/competitionTypes";
+		return "redirect:/devisionTypes";
 	}
 
 }

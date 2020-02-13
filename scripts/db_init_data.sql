@@ -19,6 +19,27 @@ VALUES ('SuRT KW',
 
 
 
+
+INSERT
+    INTO
+    DEVISION_TYPE(NAME)
+VALUES ('Production')
+,('Open')
+,('Modified')
+,('Standard')
+,('Standard Manual')
+,('Classic')
+,('Revolver')
+,('Semi Auto Open')
+,('Semi Auto Standard')
+,('Manual Action Open')
+,('Manual Action Standard')
+,('Manual Action Standard 10')
+;
+
+
+
+
 /*
 Create countries table with properly capitalized French and English
 names for each country. When possible, names are usual names (e.g. North Korea) 

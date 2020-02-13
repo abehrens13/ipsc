@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<head>
+<meta charset="utf-8"></meta>
+<title>Ändere DevisionType ${devisionType.id} -
+	${devisionType.name}</title>
+<link rel="stylesheet" href="style.css" th:href="@{/style.css}"></link>
+</head>
+<body>
+
+	<form action=""
+		th:action="@{/devisionTypes/editDevisionType/{id}(id=${devisionType.id})}"
+		th:object="${devisionType}" method="POST" id="${devisionType.id}"
+		enctype="multipart/form-data">
+		<!--  -->
+		<input type="hidden" name="id" th:value="${devisionType.id}"></input><br />
+		<!--  -->
+		<label for="name" th:text="#{devisionType.name}">devisionType</label>
+		<input type="text" th:field="*{name}"></input> <br />
+
+		<!--  -->
+		<label for="description" th:text="#{devisionType.description}">devisionType</label>
+		<input type="text" th:field="*{description}"></input> <br />
+		<!--  -->
+		<button type="submit" th:text="#{save}" />
+	</form>
+</body>
+</html>

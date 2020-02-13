@@ -1,4 +1,4 @@
-package de.openaqua.ipsc.controller;
+package de.openaqua.ipsc.entities;
 
 public class CompetitionTypeJSON {
 
