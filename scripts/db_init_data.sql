@@ -1,3 +1,24 @@
+INSERT
+    INTO
+    competition_type(NAME,
+    description)
+VALUES ('SuRT KW',
+'Sicherheits- und Regeltest Kurzwaffe'),
+('SuRT LW',
+'Sicherheits- und Regeltest Langwaffe'),
+('IPSC KW',
+'IPSC Kurzwaffe'),
+('IPSC KK',
+'IPSC Kleinkaliber'),
+('IPSC AIPSC',
+'IPSC Airsoft'),
+('IPSC Minirifle',
+'IPSC Minirifle'),
+('IPSC Rifle',
+'IPSC Minirifle');
+
+
+
 /*
 Create countries table with properly capitalized French and English
 names for each country. When possible, names are usual names (e.g. North Korea) 

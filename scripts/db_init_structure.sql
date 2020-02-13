@@ -18,7 +18,7 @@ ipsc_licence VARCHAR(20),
 ipsc_state VARCHAR(2) );
 
 CREATE TABLE competition_type ( id SERIAL,
-name VARCHAR(50),
+name VARCHAR(50) NOT NULL unique,
 description VARCHAR(200) );
 
 CREATE TABLE devision_type ( id SERIAL,
