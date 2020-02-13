@@ -7,6 +7,7 @@ import de.openaqua.ipsc.beans.SerialGenerator;
 
 @Component
 public class JavaConfig {
+
 	@Bean
 	public SerialGenerator serialGenerator() {
 		return new SerialGenerator("TEST", 40000);
