@@ -6,7 +6,7 @@ DROP TABLE competitions;
 
 DROP TABLE devision_type;
 
-DROP TABLE shooter;
+DROP TABLE shooters;
 
 DROP TABLE countries;
 

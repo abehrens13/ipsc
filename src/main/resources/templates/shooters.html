@@ -3,49 +3,50 @@
 	xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
 <head>
 <meta charset="utf-8" />
-<title></title>
+<title>Shooters</title>
 <link href="style.css" th:href="@{/style.css}" rel="stylesheet" />
 </head>
 <body>
 
+
+
 	<div class="container-fluid">
 		<div class="page-title">
 			<h2>
-				<span class="fa fa-arrow-circle-o-left">Countries</span>
+				<span class="fa fa-arrow-circle-o-left">Shooters</span>
 			</h2>
 		</div>
 		<div class="row">
 			<table class="table datatable">
 				<thead>
 					<tr>
-						<th th:text="#{country.id}">ID</th>
-						<th th:text="#{country.code}">Name</th>
-						<th th:text="#{country.name_en}">Description</th>
-						<th th:text="#{country.name_de}">Description</th>
-						<th th:text="#{country.name_fr}">Description</th>
+						<th th:text="#{shooter.id}">ID</th>
+						<th th:text="#{shooter.username}">ID</th>
+						<th th:text="#{shooter.firstname}">ID</th>
+						<th th:text="#{shooter.lastname}">ID</th>
+						<th th:text="#{shooter.country}">ID</th>
 						<th th:text="#{action}">Action</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<tr th:each="country : ${countries}">
+					<tr th:each="shooter : ${shooters}">
 						<td><a href="#"
-							th:href="@{/countries/editCountry/{id}(id=${country.id})}"
-							th:text="${country.id}"></a></td>
-						<td th:text="${country.code}">Text</td>
-						<td th:text="${country.name_en}">Text</td>
-						<td th:text="${country.name_de}">Text</td>
-						<td th:text="${country.name_fr}">Text</td>
+							th:href="@{/shooters/editShooter/{id}(id=${shooter.id})}"
+							th:text="${shooter.id}"></a></td>
+							<td th:text="${shooter.username}">Text</td>
+						<td th:text="${shooter.firstname}">Text</td>
+						<td th:text="${shooter.lastname}">Text</td>
+						<td th:text="${shooter.country.code}">Text</td>
 						<td><a href="#"
-							th:href="@{/countries/editCountry/{id}(id=${country.id})}">Edit</a>
+							th:href="@{/shooters/editShooter/{id}(id=${shooter.id})}">Edit</a>
 							<a href="#"
-							th:href="@{/countries/deleteCountry/{id}(id=${country.id})}">Delete</a>
+							th:href="@{/shooters/deleteShooter/{id}(id=${shooter.id})}">Delete</a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
-			<a href="#" th:href="@{/countries/newCountry}">New
-				Country</a>
+			<a href="#" th:href="@{/shooters/newShooter}">New</a>
 			<!--  -->
 			<a href="#" th:href="@{/competitionTypes}">Competition Types</a>
 			<!--  -->

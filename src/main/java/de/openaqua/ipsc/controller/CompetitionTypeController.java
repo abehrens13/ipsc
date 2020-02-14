@@ -1,15 +1,11 @@
 package de.openaqua.ipsc.controller;
 
-import java.util.Optional;
-
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import de.openaqua.ipsc.beans.SerialGenerator;
@@ -30,10 +25,6 @@ import de.openaqua.ipsc.reps.CompetitionTypeRepository;
 @RequestMapping(path = "/competitionTypes")
 public class CompetitionTypeController {
 	private static final Log LOG = LogFactory.getLog(CompetitionTypeController.class);
-	private static final int BUTTONS_TO_SHOW = 3;
-	private static final int INITIAL_PAGE = 0;
-	private static final int INITIAL_PAGE_SIZE = 5;
-	private static final int[] PAGE_SIZES = { 5, 10 };
 
 	@Autowired
 	ApplicationContext applicationContext;
@@ -105,8 +96,8 @@ public class CompetitionTypeController {
 	}
 
 	@PostMapping("/editCompetitionType/{id}")
-	public String editCompetitionType(@PathVariable final long id, @Valid CompetitionTypeJSON b, BindingResult bindingResult,
-			final Model model) {
+	public String editCompetitionType(@PathVariable final long id, @Valid CompetitionTypeJSON b,
+			BindingResult bindingResult, final Model model) {
 		LOG.debug("/editCompetitionType");
 
 		CompetitionType u = compsRepository.findById(id);

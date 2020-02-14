@@ -32,7 +32,7 @@ public class ContryController {
 	private static final Log LOG = LogFactory.getLog(ContryController.class);
 	private static final int BUTTONS_TO_SHOW = 3;
 	private static final int INITIAL_PAGE = 0;
-	private static final int INITIAL_PAGE_SIZE = 5;
+	private static final int INITIAL_PAGE_SIZE = 10;
 	private static final int[] PAGE_SIZES = { 5, 10 };
 
 	@Autowired
@@ -99,11 +99,7 @@ public class ContryController {
 	public String newCountry(@Valid CountryJSON unit, BindingResult bindingResult, final Model model) {
 		LOG.debug("POST /newCountry");
 		Country u = new Country();
-		u.setCode(unit.getCode());
-		u.setId(unit.getId());
-		u.setName_de(unit.getName_de());
-		u.setName_en(unit.getName_en());
-		u.setName_fr(unit.getName_fr());
+		convertCountryJSON2Country(unit, u);
 		compsRepository.save(u);
 		return "redirect:/countries";
 	}
@@ -123,15 +119,22 @@ public class ContryController {
 		LOG.debug("/editCountry");
 
 		Country u = compsRepository.findById(id);
-
-		u.setCode(unit.getCode());
-		u.setId(unit.getId());
-		u.setName_de(unit.getName_de());
-		u.setName_en(unit.getName_en());
-		u.setName_fr(unit.getName_fr());
+		convertCountryJSON2Country(unit, u);
 
 		compsRepository.save(u);
 		return "redirect:/countries";
+	}
+
+	public void convertCountryJSON2Country(final CountryJSON in, Country out) {
+		if (in == null) {
+			out = null;
+			return;
+		}
+		out.setCode(in.getCode());
+		out.setId(in.getId());
+		out.setName_de(in.getName_de());
+		out.setName_en(in.getName_en());
+		out.setName_fr(in.getName_fr());
 	}
 
 }

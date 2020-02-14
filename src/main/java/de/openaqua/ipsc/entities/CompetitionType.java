@@ -13,6 +13,11 @@ import javax.validation.constraints.NotNull;
 public class CompetitionType {
 //	private static final Log LOG = LogFactory.getLog(Competition.class);
 
+	@Override
+	public String toString() {
+		return "CompetitionType [id=" + id + ", name=" + name + ", description=" + description + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")

@@ -69,4 +69,10 @@ public class DevisionType {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	@Override
+	public String toString() {
+		return "DevisionType [id=" + id + ", name=" + name + ", description=" + description + "]";
+	}
+
 }

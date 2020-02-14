@@ -33,10 +33,10 @@ public class Country {
 	@NotNull
 	@Column(name = "name_en")
 	private String name_en;
-	
+
 	@Column(name = "name_fr")
 	private String name_fr;
-	
+
 	@Column(name = "name_de")
 	private String name_de;
 
@@ -99,6 +99,12 @@ public class Country {
 
 	public void setName_de(String name_de) {
 		this.name_de = name_de;
+	}
+
+	@Override
+	public String toString() {
+		return "Country [id=" + id + ", code=" + code + ", name_en=" + name_en + ", name_fr=" + name_fr + ", name_de="
+				+ name_de + "]";
 	}
 
 }
