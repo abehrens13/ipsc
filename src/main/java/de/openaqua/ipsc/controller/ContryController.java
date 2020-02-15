@@ -81,7 +81,7 @@ public class ContryController {
 
 	// delete
 	@GetMapping("/deleteCountry/{id}")
-	public String editCountry(@PathVariable final long id) {
+	public String deleteCountry(@PathVariable final long id) {
 		LOG.debug("/deleteCountry " + id);
 		compsRepository.deleteById(id);
 		return "redirect:/countries";
