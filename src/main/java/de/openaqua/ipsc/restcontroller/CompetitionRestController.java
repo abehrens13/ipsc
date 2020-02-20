@@ -9,47 +9,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import de.openaqua.ipsc.entities.Country;
-import de.openaqua.ipsc.reps.CountryRepository;
+import de.openaqua.ipsc.entities.Competition;
+import de.openaqua.ipsc.reps.CompetitionRepository;
 
 @RestController
-@RequestMapping(path = "/api/countries")
-public class ContryRestController {
+@RequestMapping(path = "/api/competitions")
+public class CompetitionRestController {
+
 	@Autowired
 	ApplicationContext applicationContext;
 
 	@Autowired
-	CountryRepository repository;
+	CompetitionRepository repository;
 
 	@GetMapping("/")
-	public Iterable<Country> index() {
-		return repository.findAllByOrderByCodeAsc();
+	public Iterable<Competition> index() {
+		return repository.findAllByOrderByDateStartAsc();
 
 	}
 
 	@GetMapping("/byId/{id}")
-	public Country byId(@PathVariable final long id) {
+	public Competition byId(@PathVariable final long id) {
 		return repository.findById(id);
 	}
 
-	@GetMapping("/byCode/{code}")
-	public Country byId(@PathVariable final String unit) {
-		return repository.findByCode(unit);
-	}
-
 	// delete
-	@GetMapping("/deleteCountry/{id}")
-	public void delCountry(@PathVariable final long id) {
+	@GetMapping("/deleteCompetition/{id}")
+	public void delCompetition(@PathVariable final long id) {
 		repository.deleteById(id);
 	}
 
-	@GetMapping("/newCountry")
-	public Country newCountry(final Model model) {
-		return new Country();
+	@GetMapping("/newCompetition")
+	public Competition newCompetition(final Model model) {
+		return new Competition();
 	}
 
-	@PostMapping("/newCountry")
-	public Country newCountry(@RequestBody Country c) {
+	@PostMapping("/newCompetition")
+	public Competition newCompetition(@RequestBody Competition c) {
 		return repository.save(c);
 	}
+
 }

@@ -72,8 +72,8 @@ CREATE TABLE COMPETITIONS
    COUNTRY_ID NUMERIC NOT NULL,
    DATE_START TIMESTAMP NOT NULL,
    DATE_END TIMESTAMP NOT NULL,
-   LEVEL NUMERIC NOT NULL,
-   STAGES NUMERIC NOT NULL,
+   LEVEL NUMERIC ,
+   STAGES NUMERIC,
    BULLET_COUNTS NUMERIC,
    organiser_id NUMERIC,
    title varchar (100),
@@ -81,7 +81,7 @@ CREATE TABLE COMPETITIONS
    status_id NUMERIC,
    reg_open timestamp,
    reg_close timestamp,
-   auslastung NUMERIC -- should be calculated
+   load_Factor NUMERIC -- should be calculated
 );
 CREATE TABLE REGISTRATIONS
 (

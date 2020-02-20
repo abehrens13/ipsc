@@ -410,7 +410,7 @@ insert into COMPETITIONS(
    status_id,
    reg_open,
    reg_close,
-   auslastung)
+   load_Factor)
 VALUES
 (1, 1, 1, '2019-10-10', '2019-10-11', 3, 8, 120, 1, 'Noch mal richtig', 1, 1, '2018-10-10', '2018-12-12', 100),
 (3, 3, 3, '2019-11-18', '2019-11-19', 3, 8, 120, 1, 'Lass es krachen', 1, 1, '2018-10-10', '2018-12-12', 100),
