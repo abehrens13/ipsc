@@ -361,7 +361,7 @@ AND
 ,   (' ZW', ' Zimbabwe', ' Zimbabwe')
 ;
 
-INSERT INTO STATUS_TYPE (NAME_EN, NAME_DE) VALUES ('planned','geplant'),
+INSERT INTO STATUS (NAME_EN, NAME_DE) VALUES ('planned','geplant'),
  ('preregistration','Vorregistrierung'),
  ('registration open','Registrierung'),
  ('registration closed','Registrierung abgeschlossen'),
@@ -406,7 +406,7 @@ insert into COMPETITIONS(
    BULLET_COUNTS,
    organiser_id,
    title,
-   EVENTLOCATION,
+   EVENTLOCATION_id,
    status_id,
    reg_open,
    reg_close,
