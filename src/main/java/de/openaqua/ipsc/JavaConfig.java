@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import de.openaqua.ipsc.beans.SerialGenerator;
 import de.openaqua.ipsc.landscape.Landscape;
+import de.openaqua.ipsc.landscape.LandscapeInit;
 
 @Component
 public class JavaConfig {
@@ -17,7 +18,8 @@ public class JavaConfig {
 	@Bean
 	public Landscape landscape() {
 		Landscape ls = new Landscape();
-		ls.initGermany();
+		LandscapeInit init = new LandscapeInit();
+		init.initGermany(ls);
 		return ls;
 	}
 
