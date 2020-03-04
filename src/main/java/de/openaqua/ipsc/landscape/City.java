@@ -1,7 +1,7 @@
 package de.openaqua.ipsc.landscape;
 
 public class City extends Node {
-
+	private String name;
 	private int x;
 	private int y;
 
@@ -10,9 +10,18 @@ public class City extends Node {
 	}
 
 	public City(String name, int x, int y) {
-		super(name);
+		super();
+		this.name = name;
 		this.x = x;
 		this.y = y;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getX() {
@@ -29,11 +38,6 @@ public class City extends Node {
 
 	public void setY(int y) {
 		this.y = y;
-	}
-
-	@Override
-	public String toString() {
-		return "City [name=" + getName() + ", x=" + x + ", y=" + y + "]";
 	}
 
 }

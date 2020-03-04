@@ -7,9 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,21 +21,23 @@ public class LandscapeController {
 	@Autowired
 	Landscape landscape;
 
+	@Autowired
+	CityFactory cityFactory;
+
 	public LandscapeController() {
 		LOG.debug("Init Landscape Controller");
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
 	@GetMapping("/")
-	public Iterable<Edge> index() {
+	public Iterator<Edge> index() {
 		LOG.info("GET api/landscape/");
 		return landscape.getAll();
 	}
 
-	@GetMapping("/findRoute/{from}/{to}")
-	public Iterator<Edge> delCompetition(@PathVariable final String from, @PathVariable final String to) {
-		LOG.debug("GET api/landscape/findRoute/{from}/{to}");
-		return landscape.getRoute(from, to);
+	@GetMapping("/cities")
+	public Iterator<City> getCities() {
+		LOG.info("GET api/landscape/cities");
+		return cityFactory.getCities();
 	}
 
 }

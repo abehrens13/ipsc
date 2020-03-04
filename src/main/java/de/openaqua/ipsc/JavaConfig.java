@@ -4,8 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import de.openaqua.ipsc.beans.SerialGenerator;
+import de.openaqua.ipsc.landscape.CityFactory;
 import de.openaqua.ipsc.landscape.Landscape;
-import de.openaqua.ipsc.landscape.LandscapeInit;
 
 @Component
 public class JavaConfig {
@@ -16,10 +16,14 @@ public class JavaConfig {
 	}
 
 	@Bean
+	public CityFactory cityFactory() {
+		CityFactory cf = new CityFactory();
+		return cf;
+	}
+
+	@Bean
 	public Landscape landscape() {
 		Landscape ls = new Landscape();
-		LandscapeInit init = new LandscapeInit();
-		init.initGermany(ls);
 		return ls;
 	}
 
