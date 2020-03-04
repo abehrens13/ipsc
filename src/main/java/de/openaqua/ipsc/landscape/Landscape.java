@@ -58,6 +58,7 @@ public class Landscape {
 		addTwoDirectional("Köln", "Bonn", 40, StreetType.AUTOBAHN);
 		addTwoDirectional("Aachen", "Köln", 100, StreetType.AUTOBAHN);
 		addTwoDirectional("Aachen", "Neuss", 90, StreetType.AUTOBAHN);
+		addTwoDirectional("Essen", "Duisburg", 30, StreetType.AUTOBAHN);
 
 		addTwoDirectional("Bochum", "Essen", 15, StreetType.HIGHWAY);
 		addTwoDirectional("Essen", "Remscheid", 15, StreetType.HIGHWAY);
@@ -75,14 +76,36 @@ public class Landscape {
 		addTwoDirectional("Köln", "Bonn", 30, StreetType.HIGHWAY);
 		addTwoDirectional("Aachen", "Köln", 80, StreetType.HIGHWAY);
 		addTwoDirectional("Aachen", "Neuss", 80, StreetType.HIGHWAY);
+		addTwoDirectional("Meerbusch", "Duisburg", 20, StreetType.HIGHWAY);
 
 	}
 
-	Iterator<Street> getRoute(final String from, final String to) {
+	private double getFFunction(final City from, final City to) {
+		double x = from.getX() - to.getX();
+		double y = from.getY() - to.getY();
+		return Math.hypot(x, y);
+	}
+
+	public Route getRoute(final String from, final String to, final VehicleType vehicleType) {
 		LOG.debug("Route request from: " + from + " to " + to);
 
+		// collect required data
+		Route result = new Route(cityFactory.getCity(from), cityFactory.getCity(to), vehicleType);
+
+		// test input values
+		if (result.getFrom() == null)
+			throw new CityNotFoundException("City " + from + " is unknown");
+		if (result.getTo() == null)
+			throw new CityNotFoundException("City " + to + " is unknown");
+
+		// calculate f-function basing on the coordinates
+		result.setBeeline(getFFunction(result.getFrom(), result.getTo()) * 20); // *10 cause the chosen coordinates
+																				// creates to small values
+
+		LOG.debug("getRoute: f-Value=" + result.getBeeline());
+
 		// TODO: fill in
-		return landscape.iterator();
+		return result;
 	}
 
 	public void printLandscape() {

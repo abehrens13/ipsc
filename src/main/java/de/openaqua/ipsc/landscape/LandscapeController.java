@@ -42,8 +42,9 @@ public class LandscapeController {
 	}
 
 	@GetMapping("/route")
-	public Iterator<Street> getRoute(@RequestParam String from, @RequestParam String to) {
+	public Route getRoute(@RequestParam String from, @RequestParam String to,
+			@RequestParam(required = false, defaultValue = "CAR") String vehicle) {
 		LOG.info("GET api/landscape/route?from=" + from + "&to=" + to);
-		return landscape.getRoute(from, to);
+		return landscape.getRoute(from, to, VehicleType.fromString(vehicle));
 	}
 }
