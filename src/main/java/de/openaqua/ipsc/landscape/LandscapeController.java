@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,7 +30,7 @@ public class LandscapeController {
 	}
 
 	@GetMapping("/")
-	public Iterator<Edge> index() {
+	public Iterator<Street> index() {
 		LOG.info("GET api/landscape/");
 		return landscape.getAll();
 	}
@@ -40,4 +41,9 @@ public class LandscapeController {
 		return cityFactory.getCities();
 	}
 
+	@GetMapping("/route")
+	public Iterator<Street> getRoute(@RequestParam String from, @RequestParam String to) {
+		LOG.info("GET api/landscape/route?from=" + from + "&to=" + to);
+		return landscape.getRoute(from, to);
+	}
 }

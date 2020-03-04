@@ -1,19 +1,21 @@
 package de.openaqua.ipsc.landscape;
 
-public class Edge {
-	Node nodeA;
-	Node nodeB;
-	int distance;
+public class Street {
+	private Node nodeA;
+	private Node nodeB;
+	private int distance;
+	private StreetType streetType;
 
-	public Edge() {
+	public Street() {
 		super();
 	}
 
-	public Edge(Node nodeA, Node nodeB, int distance) {
+	public Street(Node nodeA, Node nodeB, int distance, StreetType streetType) {
 		super();
 		this.nodeA = nodeA;
 		this.nodeB = nodeB;
 		this.distance = distance;
+		this.streetType = streetType;
 	}
 
 	public Node getNodeA() {
@@ -40,9 +42,18 @@ public class Edge {
 		this.distance = distance;
 	}
 
+	public StreetType getStreetType() {
+		return streetType;
+	}
+
+	public void setStreetType(StreetType streetType) {
+		this.streetType = streetType;
+	}
+
 	@Override
 	public String toString() {
-		return "Edge [nodeA=" + nodeA + ", nodeB=" + nodeB + ", distance=" + distance + "]";
+		return "Edge [nodeA=" + nodeA + ", nodeB=" + nodeB + ", distance=" + distance + ", streetType=" + streetType
+				+ "]";
 	}
 
 }
