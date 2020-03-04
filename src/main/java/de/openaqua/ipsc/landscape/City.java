@@ -1,6 +1,10 @@
 package de.openaqua.ipsc.landscape;
 
-public class City extends Node {
+import java.util.Objects;
+
+public class City extends Node //implements Comparable<City> 
+{
+
 	private String name;
 	private int x;
 	private int y;
@@ -39,5 +43,29 @@ public class City extends Node {
 	public void setY(int y) {
 		this.y = y;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(name, x, y);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!(obj instanceof City)) {
+			return false;
+		}
+		City other = (City) obj;
+		return Objects.equals(name, other.name) && x == other.x && y == other.y;
+	}
+
 
 }

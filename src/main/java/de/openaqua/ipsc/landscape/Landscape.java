@@ -1,8 +1,10 @@
 package de.openaqua.ipsc.landscape;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
@@ -11,7 +13,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class Landscape {
-	Set<Street> landscape = new HashSet<Street>();
+	// stores a collection of Streets between Cities.
+	// Between two cities there could be more than one street.
+	private Map<City, Map<City, Collection<Street>>> landscape;
 	private static final Log LOG = LogFactory.getLog(Landscape.class);
 
 	@Autowired
@@ -19,24 +23,47 @@ public class Landscape {
 
 	public Landscape() {
 		super();
+		landscape = new HashMap<City, Map<City, Collection<Street>>>();
+	}
+
+	protected void addStreet(City a, City b, Street s) {
+		if (!landscape.containsKey(a)) {
+			landscape.put(a, new HashMap<City, Collection<Street>>());
+		}
+		Map<City, Collection<Street>> m = landscape.get(a);
+
+		if (!m.containsKey(b)) {
+			m.put(b, new ArrayList<Street>());
+		}
+		Collection<Street> n = m.get(b);
+		n.add(s);
 	}
 
 	protected void addTwoDirectional(String a, String b, int dist, StreetType streetType) {
 		City nodeA = cityFactory.getCity(a);
 		City nodeB = cityFactory.getCity(b);
-		landscape.add(new Street(nodeA, nodeB, dist, streetType));
-		landscape.add(new Street(nodeB, nodeA, dist, streetType));
+		addStreet(nodeA, nodeB, new Street(nodeA, nodeB, dist, streetType));
+		addStreet(nodeB, nodeA, new Street(nodeB, nodeA, dist, streetType));
 	}
 
 	protected void addOneDirectional(String a, String b, int dist, StreetType streetType) {
 		City nodeA = cityFactory.getCity(a);
 		City nodeB = cityFactory.getCity(b);
-		landscape.add(new Street(nodeA, nodeB, dist, streetType));
+		addStreet(nodeA, nodeB, new Street(nodeA, nodeB, dist, streetType));
 	}
 
-	Iterator<Street> getAll() {
+	public Collection<Street> getAll() {
 		LOG.debug("getAll()");
-		return landscape.iterator();
+		Collection<Street> result = new ArrayList<Street>();
+		Iterator<Map<City, Collection<Street>>> it = landscape.values().iterator();
+		while (it.hasNext()) {
+			Map<City, Collection<Street>> m = it.next();
+			Iterator<Collection<Street>> n = m.values().iterator();
+			if (n.hasNext()) {
+				result.addAll(n.next());
+			}
+		}
+		return result;
 	}
 
 	@PostConstruct
@@ -102,19 +129,7 @@ public class Landscape {
 		result.setBeeline(getFFunction(result.getFrom(), result.getTo()) * 20); // *10 cause the chosen coordinates
 																				// creates to small values
 
-		LOG.debug("getRoute: f-Value=" + result.getBeeline());
-
 		// TODO: fill in
 		return result;
 	}
-
-	public void printLandscape() {
-		LOG.debug("printLandscape");
-		Iterator<Street> it = landscape.iterator();
-		while (it.hasNext()) {
-			Street e = it.next();
-			LOG.info(e.toString());
-		}
-	}
-
 }
