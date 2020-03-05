@@ -2,7 +2,7 @@ package de.openaqua.ipsc.landscape;
 
 import java.util.Objects;
 
-public class City extends Node //implements Comparable<City> 
+public class City
 {
 
 	private String name;

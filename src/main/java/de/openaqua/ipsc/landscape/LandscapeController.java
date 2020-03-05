@@ -1,6 +1,5 @@
 package de.openaqua.ipsc.landscape;
 
-import java.util.Collection;
 import java.util.Iterator;
 
 import org.apache.commons.logging.Log;
@@ -31,7 +30,7 @@ public class LandscapeController {
 	}
 
 	@GetMapping("/")
-	public Collection<Street> index() {
+	public Iterator<Street> index() {
 		LOG.info("GET api/landscape/");
 		return landscape.getAll();
 	}

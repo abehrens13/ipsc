@@ -1,47 +1,43 @@
 package de.openaqua.ipsc.landscape;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jgrapht.Graph;
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.graph.DirectedMultigraph;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class Landscape {
+
 	// stores a collection of Streets between Cities.
-	// Between two cities there could be more than one street.
-	private Map<City, Map<City, Collection<Street>>> landscape;
-	private static final Log LOG = LogFactory.getLog(Landscape.class);
+	Graph<City, Street> landscape = new DirectedMultigraph<City, Street>(Street.class);
 
 	@Autowired
 	CityFactory cityFactory;
 
+	// Between two cities there could be more than one street.
+	private static final Log LOG = LogFactory.getLog(Landscape.class);
+
 	public Landscape() {
 		super();
-		landscape = new HashMap<City, Map<City, Collection<Street>>>();
 	}
 
 	protected void addStreet(City a, City b, Street s) {
-		if (!landscape.containsKey(a)) {
-			landscape.put(a, new HashMap<City, Collection<Street>>());
-		}
-		Map<City, Collection<Street>> m = landscape.get(a);
-
-		if (!m.containsKey(b)) {
-			m.put(b, new ArrayList<Street>());
-		}
-		Collection<Street> n = m.get(b);
-		n.add(s);
+		landscape.addEdge(a, b, s);
 	}
 
 	protected void addTwoDirectional(String a, String b, int dist, StreetType streetType) {
 		City nodeA = cityFactory.getCity(a);
 		City nodeB = cityFactory.getCity(b);
+		if (nodeA == null)
+			throw new CityNotFoundException(a);
+		if (nodeB == null)
+			throw new CityNotFoundException(b);
 		addStreet(nodeA, nodeB, new Street(nodeA, nodeB, dist, streetType));
 		addStreet(nodeB, nodeA, new Street(nodeB, nodeA, dist, streetType));
 	}
@@ -49,33 +45,49 @@ public class Landscape {
 	protected void addOneDirectional(String a, String b, int dist, StreetType streetType) {
 		City nodeA = cityFactory.getCity(a);
 		City nodeB = cityFactory.getCity(b);
+		if (nodeA == null)
+			throw new CityNotFoundException(a);
+		if (nodeB == null)
+			throw new CityNotFoundException(b);
 		addStreet(nodeA, nodeB, new Street(nodeA, nodeB, dist, streetType));
 	}
 
-	public Collection<Street> getAll() {
+	public Iterator<Street> getAll() {
 		LOG.debug("getAll()");
-		Collection<Street> result = new ArrayList<Street>();
-		Iterator<Map<City, Collection<Street>>> it = landscape.values().iterator();
-		while (it.hasNext()) {
-			Map<City, Collection<Street>> m = it.next();
-			Iterator<Collection<Street>> n = m.values().iterator();
-			if (n.hasNext()) {
-				result.addAll(n.next());
-			}
-		}
-		return result;
+		return landscape.edgeSet().iterator();
 	}
 
 	@PostConstruct
 	public void postConstructInit() {
 		LOG.debug("postConstructInit");
+
+		// Add all Cities to the landscape
+		cityFactory.addCity(new City("Duisburg", 3, 4));
+		cityFactory.addCity(new City("Bochum", 4, 1));
+		cityFactory.addCity(new City("Essen", 4, 2));
+		cityFactory.addCity(new City("Remscheid", 5, 3));
+		cityFactory.addCity(new City("Meerbusch", 3, 5));
+		cityFactory.addCity(new City("Siegburg", 6, 5));
+		cityFactory.addCity(new City("Düsseldorf", 4, 6));
+		cityFactory.addCity(new City("Leverkusen", 6, 6));
+		cityFactory.addCity(new City("Bonn", 8, 6));
+		cityFactory.addCity(new City("Neuss", 3, 7));
+		cityFactory.addCity(new City("Koblenz", 6, 11));
+		cityFactory.addCity(new City("Aachen", 1, 9));
+		cityFactory.addCity(new City("Wuppertal", 5, 4));
+		cityFactory.addCity(new City("Köln", 8, 4));
+		Iterator<City> it = cityFactory.getCities();
+		while (it.hasNext())
+			landscape.addVertex(it.next());
+
+		// add all known streets to the landscape
 		addTwoDirectional("Bochum", "Essen", 20, StreetType.AUTOBAHN);
 		addTwoDirectional("Essen", "Remscheid", 20, StreetType.AUTOBAHN);
 		addTwoDirectional("Essen", "Düsseldorf", 30, StreetType.AUTOBAHN);
 		addTwoDirectional("Düsseldorf", "Meerbusch", 10, StreetType.AUTOBAHN);
 		addTwoDirectional("Düsseldorf", "Neuss", 10, StreetType.AUTOBAHN);
 		addTwoDirectional("Düsseldorf", "Leverkusen", 10, StreetType.AUTOBAHN);
-		addTwoDirectional("Düsseldorf", "Köln", 30, StreetType.AUTOBAHN);
+		addTwoDirectional("Düsseldorf", "Köln", 35, StreetType.AUTOBAHN);
 		addTwoDirectional("Leverkusen", "Bonn", 10, StreetType.AUTOBAHN);
 		addTwoDirectional("Bonn", "Siegburg", 10, StreetType.AUTOBAHN);
 		addTwoDirectional("Wuppertal", "Essen", 20, StreetType.AUTOBAHN);
@@ -107,12 +119,6 @@ public class Landscape {
 
 	}
 
-	private double getFFunction(final City from, final City to) {
-		double x = from.getX() - to.getX();
-		double y = from.getY() - to.getY();
-		return Math.hypot(x, y);
-	}
-
 	public Route getRoute(final String from, final String to, final VehicleType vehicleType) {
 		LOG.debug("Route request from: " + from + " to " + to);
 
@@ -125,11 +131,11 @@ public class Landscape {
 		if (result.getTo() == null)
 			throw new CityNotFoundException("City " + to + " is unknown");
 
-		// calculate f-function basing on the coordinates
-		result.setBeeline(getFFunction(result.getFrom(), result.getTo()) * 20); // *10 cause the chosen coordinates
-																				// creates to small values
-
-		// TODO: fill in
+		//calculate and store the distance 
+		GraphPath<City, Street> path = DijkstraShortestPath.<City, Street>findPathBetween(landscape, result.getFrom(),
+				result.getTo());
+		result.setRoute(path.getEdgeList()); //stores the distance to.
+		
 		return result;
 	}
 }

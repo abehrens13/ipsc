@@ -13,9 +13,12 @@ public class CityNotFoundException extends RuntimeException {
 	/**
 	 * 
 	 */
-
 	public CityNotFoundException() {
 		super();
+	}
+
+	public CityNotFoundException(String cityName) {
+		super("City " + cityName + " not found");
 	}
 
 	public CityNotFoundException(String message, Throwable cause, boolean enableSuppression,
@@ -25,10 +28,6 @@ public class CityNotFoundException extends RuntimeException {
 
 	public CityNotFoundException(String message, Throwable cause) {
 		super(message, cause);
-	}
-
-	public CityNotFoundException(String message) {
-		super(message);
 	}
 
 	public CityNotFoundException(Throwable cause) {

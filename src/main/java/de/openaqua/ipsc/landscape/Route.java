@@ -1,6 +1,7 @@
 package de.openaqua.ipsc.landscape;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 public class Route {
 	private City from;
@@ -72,6 +73,11 @@ public class Route {
 
 	public void setRoute(Collection<Street> route) {
 		this.route = route;
+		Iterator<Street> it = getRoute().iterator();
+		while (it.hasNext()) {
+			setDistance(getDistance() + it.next().getDistance());
+		}
+
 	}
 
 }

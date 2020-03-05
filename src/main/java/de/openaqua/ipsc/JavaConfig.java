@@ -1,6 +1,7 @@
 package de.openaqua.ipsc;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import de.openaqua.ipsc.beans.SerialGenerator;
@@ -15,13 +16,14 @@ public class JavaConfig {
 		return new SerialGenerator("TEST", 40000);
 	}
 
-	@Bean
+	@Bean("cityFactory")
 	public CityFactory cityFactory() {
 		CityFactory cf = new CityFactory();
 		return cf;
 	}
 
-	@Bean
+	@Bean("landscape")
+	@DependsOn(value = { "cityFactory" })
 	public Landscape landscape() {
 		Landscape ls = new Landscape();
 		return ls;

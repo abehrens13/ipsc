@@ -1,8 +1,8 @@
 package de.openaqua.ipsc.landscape;
 
 public class Street {
-	private Node nodeA;
-	private Node nodeB;
+	private City nodeA;
+	private City nodeB;
 	private int distance;
 	private StreetType streetType;
 
@@ -10,7 +10,7 @@ public class Street {
 		super();
 	}
 
-	public Street(Node nodeA, Node nodeB, int distance, StreetType streetType) {
+	public Street(City nodeA, City nodeB, int distance, StreetType streetType) {
 		super();
 		this.nodeA = nodeA;
 		this.nodeB = nodeB;
@@ -18,19 +18,19 @@ public class Street {
 		this.streetType = streetType;
 	}
 
-	public Node getNodeA() {
+	public City getNodeA() {
 		return nodeA;
 	}
 
-	public void setNodeA(Node nodeA) {
+	public void setNodeA(City nodeA) {
 		this.nodeA = nodeA;
 	}
 
-	public Node getNodeB() {
+	public City getNodeB() {
 		return nodeB;
 	}
 
-	public void setNodeB(Node nodeB) {
+	public void setNodeB(City nodeB) {
 		this.nodeB = nodeB;
 	}
 
