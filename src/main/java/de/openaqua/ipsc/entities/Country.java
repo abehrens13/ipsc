@@ -1,46 +1,26 @@
 package de.openaqua.ipsc.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-/*
- * CREATE TABLE COUNTRIES(ID SERIAL,
-CODE CHAR(3) NOT NULL UNIQUE,
-NAME_EN VARCHAR(50) NOT NULL UNIQUE,
-NAME_DE VARCHAR(50),
-NAME_FR VARCHAR(50))
- */
-
-@Entity
-@Table(name = "countries")
+@Document
 public class Country {
-//	private static final Log LOG = LogFactory.getLog(Competition.class);
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+	private String id;
 
 	@NotNull
-	@Column(name = "code")
 	private String code;
 
 	@NotNull
-	@Column(name = "name_en")
 	private String name_en;
 
-	@Column(name = "name_fr")
 	private String name_fr;
 
-	@Column(name = "name_de")
 	private String name_de;
 
-	public Country(Long id, @NotNull String code, @NotNull String name_en, String name_fr, String name_de) {
+	public Country(String id, @NotNull String code, @NotNull String name_en, String name_fr, String name_de) {
 		super();
 		this.id = id;
 		this.code = code;
@@ -61,11 +41,11 @@ public class Country {
 		super();
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

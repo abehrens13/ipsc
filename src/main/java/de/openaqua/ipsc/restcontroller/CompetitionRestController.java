@@ -1,5 +1,8 @@
 package de.openaqua.ipsc.restcontroller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.ui.Model;
@@ -23,19 +26,19 @@ public class CompetitionRestController {
 	CompetitionRepository repository;
 
 	@GetMapping("/")
-	public Iterable<Competition> index() {
-		return repository.findAllByOrderByDateStartAsc();
+	public List<Competition> index() {
+		return repository.findAll();
 
 	}
 
 	@GetMapping("/byId/{id}")
-	public Competition byId(@PathVariable final long id) {
+	public Optional<Competition> byId(@PathVariable final String id) {
 		return repository.findById(id);
 	}
 
 	// delete
 	@GetMapping("/deleteCompetition/{id}")
-	public void delCompetition(@PathVariable final long id) {
+	public void delCompetition(@PathVariable final String id) {
 		repository.deleteById(id);
 	}
 

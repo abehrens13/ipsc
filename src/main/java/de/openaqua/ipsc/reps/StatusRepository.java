@@ -4,9 +4,8 @@ import org.springframework.stereotype.Repository;
 
 import de.openaqua.ipsc.entities.Status;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 @Repository
-public interface StatusRepository extends CrudRepository<Status, Long> {
-	Status findById(long id);
+public interface StatusRepository extends MongoRepository<Status, String> {
 }

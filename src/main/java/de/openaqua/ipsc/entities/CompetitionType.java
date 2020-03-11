@@ -1,17 +1,11 @@
 package de.openaqua.ipsc.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "competition_type")
+@Document
 public class CompetitionType {
-//	private static final Log LOG = LogFactory.getLog(Competition.class);
 
 	@Override
 	public String toString() {
@@ -19,11 +13,9 @@ public class CompetitionType {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+	private String id;
 
-	public CompetitionType(Long id, String name, String description) {
+	public CompetitionType(String id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -45,17 +37,15 @@ public class CompetitionType {
 	}
 
 	@NotNull
-	@Column(name = "name")
 	private String name;
 
-	@Column(name = "description")
 	private String description;
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
