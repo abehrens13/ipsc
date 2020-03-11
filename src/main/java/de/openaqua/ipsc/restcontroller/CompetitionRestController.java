@@ -3,9 +3,10 @@ package de.openaqua.ipsc.restcontroller;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,9 @@ import de.openaqua.ipsc.reps.CompetitionRepository;
 @RestController
 @RequestMapping(path = "/api/competitions")
 public class CompetitionRestController {
-
+	Logger LOG = LoggerFactory.getLogger(CompetitionRestController.class);
+	
+	
 	@Autowired
 	ApplicationContext applicationContext;
 
@@ -27,6 +30,7 @@ public class CompetitionRestController {
 
 	@GetMapping("/")
 	public List<Competition> index() {
+		LOG.debug("index()");
 		return repository.findAll();
 
 	}
@@ -43,7 +47,7 @@ public class CompetitionRestController {
 	}
 
 	@GetMapping("/newCompetition")
-	public Competition newCompetition(final Model model) {
+	public Competition newCompetition() {
 		return new Competition();
 	}
 

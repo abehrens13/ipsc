@@ -6,7 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Shooter {
-//	private static final Log LOG = LogFactory.getLog(Competition.class);
 
 	@Id
 	private String id;
@@ -27,24 +26,12 @@ public class Shooter {
 	private String email;
 
 	@NotNull
-	private Country country;
+	private String country;
 
 	private String ipsc_licence;
 
-	public Shooter(@NotNull String username, @NotNull String password, @NotNull String firstname,
-			@NotNull String lastname, @NotNull String email, @NotNull Country country, String ipsc_licence) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.email = email;
-		this.country = country;
-		this.ipsc_licence = ipsc_licence;
-	}
-
 	public Shooter(String id, @NotNull String username, @NotNull String password, @NotNull String firstname,
-			@NotNull String lastname, @NotNull String email, @NotNull Country country, String ipsc_licence) {
+			@NotNull String lastname, @NotNull String email, @NotNull String country, String ipsc_licence) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -56,8 +43,16 @@ public class Shooter {
 		this.ipsc_licence = ipsc_licence;
 	}
 
-	public Shooter() {
+	public Shooter(@NotNull String username, @NotNull String password, @NotNull String firstname,
+			@NotNull String lastname, @NotNull String email, @NotNull String country, String ipsc_licence) {
 		super();
+		this.username = username;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.email = email;
+		this.country = country;
+		this.ipsc_licence = ipsc_licence;
 	}
 
 	public String getId() {
@@ -108,11 +103,11 @@ public class Shooter {
 		this.email = email;
 	}
 
-	public Country getCountry() {
+	public String getCountry() {
 		return country;
 	}
 
-	public void setCountry(Country country) {
+	public void setCountry(String country) {
 		this.country = country;
 	}
 
@@ -122,6 +117,13 @@ public class Shooter {
 
 	public void setIpsc_licence(String ipsc_licence) {
 		this.ipsc_licence = ipsc_licence;
+	}
+
+	@Override
+	public String toString() {
+		return "Shooter [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", email=" + email + ", country=" + country + ", ipsc_licence="
+				+ ipsc_licence + "]";
 	}
 
 }

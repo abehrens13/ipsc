@@ -36,20 +36,4 @@ public class StatusRestController {
 		return repository.findById(id);
 	}
 
-	// delete
-	@GetMapping("/deleteCompetition/{id}")
-	public void delCompetition(@PathVariable final String id) {
-		repository.deleteById(id);
-	}
-
-	@GetMapping("/newCompetition")
-	public Competition newCompetition(final Model model) {
-		return new Competition();
-	}
-
-	@PostMapping("/newCompetition")
-	public Status newCompetition(@RequestBody Status c) {
-		return repository.save(c);
-	}
-
 }

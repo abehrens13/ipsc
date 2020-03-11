@@ -1,6 +1,9 @@
 package de.openaqua.ipsc.entities;
 
 import java.sql.Time;
+import java.util.Date;
+import java.util.Objects;
+
 import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,18 +23,18 @@ public class Competition {
 	private CompetitionType competitionType;
 
 	@NotNull
-	private DevisionType devisionType;
+	private String devisionType;
 
 	@NotNull
-	private Country country;
+	private String country;
 
 	@NotNull
-	private Time dateStart;
+	private Date dateStart;
 
 	@NotNull
-	private Time dateEnd;
+	private Date dateEnd;
 
-	private Integer level;
+	private String level;
 
 	private Integer stages;
 
@@ -45,9 +48,13 @@ public class Competition {
 
 	private Integer load_Factor;
 
-	public Competition(String id, @NotNull CompetitionType competitionType, @NotNull DevisionType devisionType,
-			@NotNull Country country, @NotNull Time dateStart, @NotNull Time dateEnd, Integer level, Integer stages,
-			int bulletCounts, String title, Time regOpen, Time regClose, Integer load_Factor) {
+	public Competition() {
+		super();
+	}
+
+	public Competition(String id, @NotNull CompetitionType competitionType, @NotNull String devisionType,
+			@NotNull String country, @NotNull Date dateStart, @NotNull Date dateEnd, String level, Integer stages,
+			Integer bulletCounts, String title, Time regOpen, Time regClose, Integer load_Factor) {
 		super();
 		this.id = id;
 		this.competitionType = competitionType;
@@ -64,9 +71,9 @@ public class Competition {
 		this.load_Factor = load_Factor;
 	}
 
-	public Competition(@NotNull CompetitionType competitionType, @NotNull DevisionType devisionType,
-			@NotNull Country country, @NotNull Time dateStart, @NotNull Time dateEnd, Integer level, Integer stages,
-			int bulletCounts, String title, Time regOpen, Time regClose, Integer load_Factor) {
+	public Competition(@NotNull CompetitionType competitionType, @NotNull String devisionType, @NotNull String country,
+			@NotNull Date dateStart, @NotNull Date dateEnd, String level, Integer stages, Integer bulletCounts,
+			String title, Time regOpen, Time regClose, Integer load_Factor) {
 		super();
 		this.competitionType = competitionType;
 		this.devisionType = devisionType;
@@ -80,10 +87,6 @@ public class Competition {
 		this.regOpen = regOpen;
 		this.regClose = regClose;
 		this.load_Factor = load_Factor;
-	}
-
-	public Competition() {
-		super();
 	}
 
 	public String getId() {
@@ -102,43 +105,43 @@ public class Competition {
 		this.competitionType = competitionType;
 	}
 
-	public DevisionType getDevisionType() {
+	public String getDevisionType() {
 		return devisionType;
 	}
 
-	public void setDevisionType(DevisionType devisionType) {
+	public void setDevisionType(String devisionType) {
 		this.devisionType = devisionType;
 	}
 
-	public Country getCountry() {
+	public String getCountry() {
 		return country;
 	}
 
-	public void setCountry(Country country) {
+	public void setCountry(String country) {
 		this.country = country;
 	}
 
-	public Time getDateStart() {
-		return (Time) dateStart.clone();
+	public Date getDateStart() {
+		return dateStart;
 	}
 
-	public void setDateStart(Time dateStart) {
-		this.dateStart = (Time) dateStart.clone();
+	public void setDateStart(Date dateStart) {
+		this.dateStart = dateStart;
 	}
 
-	public Time getDateEnd() {
+	public Date getDateEnd() {
 		return dateEnd;
 	}
 
-	public void setDateEnd(Time dateEnd) {
+	public void setDateEnd(Date dateEnd) {
 		this.dateEnd = dateEnd;
 	}
 
-	public Integer getLevel() {
+	public String getLevel() {
 		return level;
 	}
 
-	public void setLevel(int level) {
+	public void setLevel(String level) {
 		this.level = level;
 	}
 
@@ -146,7 +149,7 @@ public class Competition {
 		return stages;
 	}
 
-	public void setStages(int stages) {
+	public void setStages(Integer stages) {
 		this.stages = stages;
 	}
 
@@ -154,7 +157,7 @@ public class Competition {
 		return bulletCounts;
 	}
 
-	public void setBulletCounts(int bulletCounts) {
+	public void setBulletCounts(Integer bulletCounts) {
 		this.bulletCounts = bulletCounts;
 	}
 
@@ -182,12 +185,44 @@ public class Competition {
 		this.regClose = regClose;
 	}
 
-	public Integer getLoadFactor() {
+	public Integer getLoad_Factor() {
 		return load_Factor;
 	}
 
-	public void setLoadFactor(int loadFactor) {
-		this.load_Factor = loadFactor;
+	public void setLoad_Factor(Integer load_Factor) {
+		this.load_Factor = load_Factor;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(bulletCounts, competitionType, country, dateEnd, dateStart, devisionType, id, level,
+				load_Factor, regClose, regOpen, stages, title);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof Competition)) {
+			return false;
+		}
+		Competition other = (Competition) obj;
+		return Objects.equals(bulletCounts, other.bulletCounts)
+				&& Objects.equals(competitionType, other.competitionType) && Objects.equals(country, other.country)
+				&& Objects.equals(dateEnd, other.dateEnd) && Objects.equals(dateStart, other.dateStart)
+				&& Objects.equals(devisionType, other.devisionType) && Objects.equals(id, other.id)
+				&& Objects.equals(level, other.level) && Objects.equals(load_Factor, other.load_Factor)
+				&& Objects.equals(regClose, other.regClose) && Objects.equals(regOpen, other.regOpen)
+				&& Objects.equals(stages, other.stages) && Objects.equals(title, other.title);
+	}
+
+	@Override
+	public String toString() {
+		return "Competition [id=" + id + ", competitionType=" + competitionType + ", devisionType=" + devisionType
+				+ ", country=" + country + ", dateStart=" + dateStart + ", dateEnd=" + dateEnd + ", level=" + level
+				+ ", stages=" + stages + ", bulletCounts=" + bulletCounts + ", title=" + title + ", regOpen=" + regOpen
+				+ ", regClose=" + regClose + ", load_Factor=" + load_Factor + "]";
 	}
 
 }
