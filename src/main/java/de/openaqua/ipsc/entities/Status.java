@@ -1,36 +1,24 @@
 package de.openaqua.ipsc.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "status")
+@Document
 public class Status {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+	private String id;
 
 	@NotNull
-	@Column(name = "name_en")
 	private String name_en;
-
-	@Column(name = "name_de")
 	private String name_de;
-
-	@Column(name = "name_fr")
 	private String name_fr;
 
 	public Status() {
 		super();
 	}
 
-	public Status(Long id, @NotNull String name_en, String name_de, String name_fr) {
+	public Status(String id, @NotNull String name_en, String name_de, String name_fr) {
 		super();
 		this.id = id;
 		this.name_en = name_en;
@@ -38,11 +26,11 @@ public class Status {
 		this.name_fr = name_fr;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

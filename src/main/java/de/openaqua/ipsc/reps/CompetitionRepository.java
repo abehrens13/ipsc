@@ -3,10 +3,14 @@ package de.openaqua.ipsc.reps;
 import org.springframework.stereotype.Repository;
 
 import de.openaqua.ipsc.entities.Competition;
-import org.springframework.data.repository.CrudRepository;
+import de.openaqua.ipsc.entities.CompetitionType;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 @Repository
-public interface CompetitionRepository extends CrudRepository<Competition, Long> {
-	Competition findById(long id);
-	Iterable<Competition> findAllByOrderByDateStartAsc();
+public interface CompetitionRepository extends MongoRepository<Competition, String> {
+	public Optional<Competition> findById(String id);
+	public List<Competition> findByCompetitionType(CompetitionType type);
 }

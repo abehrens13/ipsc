@@ -8,14 +8,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
-import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
-import org.jgrapht.graph.DirectedMultigraph;
+import org.jgrapht.alg.shortestpath.AStarShortestPath;
+import org.jgrapht.graph.DirectedWeightedPseudograph;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class Landscape {
 
 	// stores a collection of Streets between Cities.
-	Graph<City, Street> landscape = new DirectedMultigraph<City, Street>(Street.class);
+	Graph<City, Street> landscape = new DirectedWeightedPseudograph<City, Street>(Street.class);
 
 	@Autowired
 	CityFactory cityFactory;
@@ -57,6 +57,11 @@ public class Landscape {
 		return landscape.edgeSet().iterator();
 	}
 
+	public Iterator<Street> getAllStreets() {
+		LOG.debug("getAllStreets()");
+		return landscape.edgeSet().iterator();
+	}
+
 	@PostConstruct
 	public void postConstructInit() {
 		LOG.debug("postConstructInit");
@@ -84,7 +89,6 @@ public class Landscape {
 		addTwoDirectional("Bochum", "Essen", 20, StreetType.AUTOBAHN);
 		addTwoDirectional("Essen", "Remscheid", 20, StreetType.AUTOBAHN);
 		addTwoDirectional("Essen", "Düsseldorf", 30, StreetType.AUTOBAHN);
-		addTwoDirectional("Düsseldorf", "Meerbusch", 10, StreetType.AUTOBAHN);
 		addTwoDirectional("Düsseldorf", "Neuss", 10, StreetType.AUTOBAHN);
 		addTwoDirectional("Düsseldorf", "Leverkusen", 10, StreetType.AUTOBAHN);
 		addTwoDirectional("Düsseldorf", "Köln", 35, StreetType.AUTOBAHN);
@@ -131,11 +135,11 @@ public class Landscape {
 		if (result.getTo() == null)
 			throw new CityNotFoundException("City " + to + " is unknown");
 
-		//calculate and store the distance 
-		GraphPath<City, Street> path = DijkstraShortestPath.<City, Street>findPathBetween(landscape, result.getFrom(),
-				result.getTo());
-		result.setRoute(path.getEdgeList()); //stores the distance to.
-		
+		// calculate and store the distance
+		AStarShortestPath<City, Street> router = new AStarShortestPathIntern(landscape, vehicleType);
+		GraphPath<City, Street> path = router.getPath(result.getFrom(), result.getTo());
+		result.setRoute(path.getEdgeList()); // stores the distance to.
+
 		return result;
 	}
 }

@@ -1,19 +1,11 @@
 package de.openaqua.ipsc.entities;
 
 import java.sql.Time;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "competitions")
+@Document("Department")
 public class Competition {
 
 	/*
@@ -22,52 +14,38 @@ public class Competition {
 	 */
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+	private String id;
 
 	@NotNull
-	@ManyToOne(cascade = CascadeType.ALL)
 	private CompetitionType competitionType;
 
 	@NotNull
-//	@Column(name = "DEVISION_TYPE_ID")
-	@ManyToOne(cascade = CascadeType.ALL)
 	private DevisionType devisionType;
 
 	@NotNull
-	@ManyToOne(cascade = CascadeType.ALL)
 	private Country country;
 
 	@NotNull
-	@Column(name = "DATE_START")
 	private Time dateStart;
 
 	@NotNull
-	@Column(name = "DATE_END")
 	private Time dateEnd;
 
-	@Column(name = "LEVEL")
 	private Integer level;
 
-	@Column(name = "STAGES")
 	private Integer stages;
 
-	@Column(name = "BULLET_COUNTS")
 	private Integer bulletCounts;
 
-	@Column(name = "title")
 	private String title;
 
-	@Column(name = "reg_open")
 	private Time regOpen;
 
-	@Column(name = "reg_close")
 	private Time regClose;
 
 	private Integer load_Factor;
 
-	public Competition(Long id, @NotNull CompetitionType competitionType, @NotNull DevisionType devisionType,
+	public Competition(String id, @NotNull CompetitionType competitionType, @NotNull DevisionType devisionType,
 			@NotNull Country country, @NotNull Time dateStart, @NotNull Time dateEnd, Integer level, Integer stages,
 			int bulletCounts, String title, Time regOpen, Time regClose, Integer load_Factor) {
 		super();
@@ -108,11 +86,11 @@ public class Competition {
 		super();
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

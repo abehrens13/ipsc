@@ -41,6 +41,14 @@ public class LandscapeController {
 		return cityFactory.getCities();
 	}
 
+	
+	@GetMapping("/streets")
+	public Iterator<Street> getStreets() {
+		LOG.info("GET api/landscape/streets");
+		return landscape.getAllStreets();
+	}
+
+	
 	@GetMapping("/route")
 	public Route getRoute(@RequestParam String from, @RequestParam String to,
 			@RequestParam(required = false, defaultValue = "CAR") String vehicle) {

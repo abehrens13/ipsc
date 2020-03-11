@@ -1,63 +1,34 @@
 package de.openaqua.ipsc.entities;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-/*
- * 
-CREATE TABLE SHOOTERS(ID SERIAL,
-		USERNAME VARCHAR(20) NOT NULL UNIQUE,
-		PASSWORDSTR VARCHAR(50) NOT NULL,
-		FIRSTNAME VARCHAR(40),
-		LASTNAME VARCHAR(40),
-		EMAIL VARCHAR(50),
-		COUNTRY_ID NUMERIC NOT NULL,
-		IPSC_LICENCE VARCHAR(20));
-
-*/
-
-@Entity
-@Table(name = "shooters")
+@Document
 public class Shooter {
 //	private static final Log LOG = LogFactory.getLog(Competition.class);
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+	private String id;
 
 	@NotNull
-	@Column(name = "username")
 	private String username;
 
 	@NotNull
-	@Column(name = "passwordstr")
 	private String password;
 
 	@NotNull
-	@Column(name = "firstname")
 	private String firstname;
 
 	@NotNull
-	@Column(name = "lastname")
 	private String lastname;
 
 	@NotNull
-	@Column(name = "email")
 	private String email;
 
 	@NotNull
-	@ManyToOne(cascade = CascadeType.ALL)
 	private Country country;
 
-	@Column(name = "ipsc_licence")
 	private String ipsc_licence;
 
 	public Shooter(@NotNull String username, @NotNull String password, @NotNull String firstname,
@@ -72,7 +43,7 @@ public class Shooter {
 		this.ipsc_licence = ipsc_licence;
 	}
 
-	public Shooter(Long id, @NotNull String username, @NotNull String password, @NotNull String firstname,
+	public Shooter(String id, @NotNull String username, @NotNull String password, @NotNull String firstname,
 			@NotNull String lastname, @NotNull String email, @NotNull Country country, String ipsc_licence) {
 		super();
 		this.id = id;
@@ -89,11 +60,11 @@ public class Shooter {
 		super();
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

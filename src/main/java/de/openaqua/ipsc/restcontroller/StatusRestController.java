@@ -1,5 +1,7 @@
 package de.openaqua.ipsc.restcontroller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.ui.Model;
@@ -30,13 +32,13 @@ public class StatusRestController {
 	}
 
 	@GetMapping("/byId/{id}")
-	public Status byId(@PathVariable final long id) {
+	public Optional<Status> byId(@PathVariable final String id) {
 		return repository.findById(id);
 	}
 
 	// delete
 	@GetMapping("/deleteCompetition/{id}")
-	public void delCompetition(@PathVariable final long id) {
+	public void delCompetition(@PathVariable final String id) {
 		repository.deleteById(id);
 	}
 

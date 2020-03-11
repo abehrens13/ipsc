@@ -2,8 +2,7 @@ package de.openaqua.ipsc.landscape;
 
 import java.util.Objects;
 
-public class City
-{
+public class City {
 
 	private String name;
 	private int x;
@@ -66,6 +65,5 @@ public class City
 		City other = (City) obj;
 		return Objects.equals(name, other.name) && x == other.x && y == other.y;
 	}
-
 
 }
