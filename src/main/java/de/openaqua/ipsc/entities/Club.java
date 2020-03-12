@@ -1,43 +1,34 @@
 package de.openaqua.ipsc.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("Shooter")
-public class Shooter {
+@Document("Clubs")
+public class Club {
 
 	@Id
 	public String id;
 
 	@NotNull
-	public String username;
+	public String name;
 
-	@NotNull
-	public String password;
-
-	@NotNull
-	public String firstname;
-
-	@NotNull
-	public String lastname;
+	public String website;
 
 	@NotNull
 	public String email;
 
-	@NotNull
-	public CountryType country;
-
-	public String ipsc_licence;
-
 	public Address address;
-
-	public List<Weapon> weapons;
-
-	public Shooter() {
+	
+	public List<String> competitions;
+	public List<String> members;
+	public Club() {
 		super();
+		this.competitions = new ArrayList<String>();
+		this.members=new ArrayList<String>();  
+		this.address = new Address();
 	}
-
 }
