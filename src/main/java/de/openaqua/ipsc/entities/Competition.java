@@ -7,8 +7,10 @@ import java.util.Objects;
 import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-@Document("Department")
+@Document("Competition")
 public class Competition {
 
 	/*
@@ -23,15 +25,17 @@ public class Competition {
 	private CompetitionType competitionType;
 
 	@NotNull
-	private String devisionType;
+	private DevisionType devisionType;
 
 	@NotNull
-	private String country;
+	private CountryType country;
 
 	@NotNull
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date dateStart;
 
 	@NotNull
+	@DateTimeFormat(iso = ISO.DATE)
 	private Date dateEnd;
 
 	private String level;
@@ -42,9 +46,11 @@ public class Competition {
 
 	private String title;
 
-	private Time regOpen;
+	@DateTimeFormat(iso = ISO.DATE_TIME)
+	private Date regOpen;
 
-	private Time regClose;
+	@DateTimeFormat(iso = ISO.DATE_TIME)
+	private Date regClose;
 
 	private Integer load_Factor;
 
@@ -52,8 +58,8 @@ public class Competition {
 		super();
 	}
 
-	public Competition(String id, @NotNull CompetitionType competitionType, @NotNull String devisionType,
-			@NotNull String country, @NotNull Date dateStart, @NotNull Date dateEnd, String level, Integer stages,
+	public Competition(String id, @NotNull CompetitionType competitionType, @NotNull DevisionType devisionType,
+			@NotNull CountryType country, @NotNull Date dateStart, @NotNull Date dateEnd, String level, Integer stages,
 			Integer bulletCounts, String title, Time regOpen, Time regClose, Integer load_Factor) {
 		super();
 		this.id = id;
@@ -71,9 +77,9 @@ public class Competition {
 		this.load_Factor = load_Factor;
 	}
 
-	public Competition(@NotNull CompetitionType competitionType, @NotNull String devisionType, @NotNull String country,
-			@NotNull Date dateStart, @NotNull Date dateEnd, String level, Integer stages, Integer bulletCounts,
-			String title, Time regOpen, Time regClose, Integer load_Factor) {
+	public Competition(@NotNull CompetitionType competitionType, @NotNull DevisionType devisionType,
+			@NotNull CountryType country, @NotNull Date dateStart, @NotNull Date dateEnd, String level, Integer stages,
+			Integer bulletCounts, String title, Time regOpen, Time regClose, Integer load_Factor) {
 		super();
 		this.competitionType = competitionType;
 		this.devisionType = devisionType;
@@ -105,19 +111,19 @@ public class Competition {
 		this.competitionType = competitionType;
 	}
 
-	public String getDevisionType() {
+	public DevisionType getDevisionType() {
 		return devisionType;
 	}
 
-	public void setDevisionType(String devisionType) {
+	public void setDevisionType(DevisionType devisionType) {
 		this.devisionType = devisionType;
 	}
 
-	public String getCountry() {
+	public CountryType getCountry() {
 		return country;
 	}
 
-	public void setCountry(String country) {
+	public void setCountry(CountryType country) {
 		this.country = country;
 	}
 
@@ -169,19 +175,19 @@ public class Competition {
 		this.title = title;
 	}
 
-	public Time getRegOpen() {
+	public Date getRegOpen() {
 		return regOpen;
 	}
 
-	public void setRegOpen(Time regOpen) {
+	public void setRegOpen(Date regOpen) {
 		this.regOpen = regOpen;
 	}
 
-	public Time getRegClose() {
+	public Date getRegClose() {
 		return regClose;
 	}
 
-	public void setRegClose(Time regClose) {
+	public void setRegClose(Date regClose) {
 		this.regClose = regClose;
 	}
 
