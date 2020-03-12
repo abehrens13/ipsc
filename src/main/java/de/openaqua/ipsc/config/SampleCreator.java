@@ -115,11 +115,15 @@ public class SampleCreator {
 	RegistrationsRepository regRep;
 
 	public void createSampleRegistrations() {
-		Registration a = new Registration();
-		a.registrationDate = new Date();
-		a.shooterId = "abcdef";
-		a.competitionId = "fgeadf";
-		regRep.save(a);
+		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
+		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
+		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
+		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
+		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
+		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
+		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
+		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
+		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
 
 	}
 
