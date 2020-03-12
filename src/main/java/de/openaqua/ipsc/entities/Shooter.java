@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import de.openaqua.ipsc.types.CountryType;
 
-@Document("Shooter")
+@Document("Shooters")
 public class Shooter {
 
 	@Id
@@ -39,12 +39,14 @@ public class Shooter {
 
 	public List<Weapon> weapons;
 
-	public List<Club> clubs;
+	public List<String> clubs_id;
 
 	public Shooter() {
 		super();
-		weapons = new ArrayList<Weapon>();
-		clubs = new ArrayList<Club>();
+		this.weapons = new ArrayList<Weapon>();
+		this.clubs_id = new ArrayList<String>();
+		this.address = new Address();
+		this.country = CountryType.DE;
 	}
 
 }

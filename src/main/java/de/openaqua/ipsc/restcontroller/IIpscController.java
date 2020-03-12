@@ -20,7 +20,7 @@ public abstract class IIpscController<T> {
 
 	@GetMapping("/")
 	public List<T> index() {
-		LOG.info("GET /");
+		LOG.info("GET /" );
 		return getRepository().findAll();
 
 	}

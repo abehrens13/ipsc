@@ -13,13 +13,17 @@ import org.springframework.stereotype.Component;
 import de.openaqua.ipsc.entities.Club;
 import de.openaqua.ipsc.entities.Competition;
 import de.openaqua.ipsc.entities.Registration;
+import de.openaqua.ipsc.entities.Shooter;
+import de.openaqua.ipsc.entities.Weapon;
 import de.openaqua.ipsc.reps.ClubsRepository;
 import de.openaqua.ipsc.reps.CompetitionRepository;
 import de.openaqua.ipsc.reps.RegistrationsRepository;
+import de.openaqua.ipsc.reps.ShootersRepository;
 import de.openaqua.ipsc.types.CompetitionType;
 import de.openaqua.ipsc.types.CountryType;
 import de.openaqua.ipsc.types.DevisionType;
 import de.openaqua.ipsc.types.OpenType;
+import de.openaqua.ipsc.types.PowerFactorType;
 
 @Component
 public class SampleCreator {
@@ -123,10 +127,46 @@ public class SampleCreator {
 
 	}
 
+	@Autowired
+	ShootersRepository shootersRep;
+
+	public void createSampleShooters() {
+		Shooter a = new Shooter();
+		a.country = CountryType.DE;
+		a.address.city = "Bonn";
+		a.address.country = CountryType.DE;
+		a.address.postCode = "12456";
+		a.email = "foo@nowhere.com";
+		a.firstname = "Tom";
+		a.lastname = "Sawyer";
+		a.password = "xxx";
+		a.username = "tom.saw";
+		a.ipsc_licence = "1241231";
+
+		Weapon b = new Weapon();
+		b.caliber = "9mm Luger";
+		b.gunType = "Walther PPQ Q4";
+		b.powerFactor = PowerFactorType.MINOR;
+		b.prefDevisionType = DevisionType.PRODUCTION_OPTICS;
+		b.serialNumber = "ABC01234";
+		Weapon c = new Weapon();
+		c.caliber = "9mm Luger";
+		c.gunType = "Walther PPQ Q5";
+		c.powerFactor = PowerFactorType.MINOR;
+		c.prefDevisionType = DevisionType.PRODUCTION;
+		c.serialNumber = "ABC012342";
+
+		a.weapons.add(b);
+		a.weapons.add(c);
+
+		shootersRep.save(a);
+	}
+
 	public void createSampleData() {
 		createSampleCompetition();
 		createSampleClubs();
 		createSampleRegistrations();
+		createSampleShooters();
 	}
 
 }
