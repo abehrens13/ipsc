@@ -58,6 +58,9 @@ public class Competition {
 	public Competition() {
 		super();
 		devisionType = new ArrayList<DevisionType>();
+		this.competitionType = CompetitionType.IPSCHandgun;
+		this.country = CountryType.DE;
+		this.openFor = OpenType.CLUB;
 	}
 
 }

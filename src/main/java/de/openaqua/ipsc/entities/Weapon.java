@@ -13,9 +13,10 @@ public class Weapon {
 	public String serialNumber;
 	public String caliber;
 	public DevisionType prefDevisionType;
-	
+
 	public Weapon() {
 		super();
-		this.powerFactor= PowerFactorType.MAJOR;
+		this.powerFactor = PowerFactorType.MAJOR;
+		this.prefDevisionType = DevisionType.PRODUCTION;
 	}
 }

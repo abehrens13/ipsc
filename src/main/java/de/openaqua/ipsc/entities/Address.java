@@ -8,4 +8,10 @@ public class Address {
 	public CountryType country;
 	public String city;
 	public String postCode;
+
+	public Address() {
+		super();
+		this.country = CountryType.DE;
+	}
+
 }
