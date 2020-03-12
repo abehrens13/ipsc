@@ -12,12 +12,14 @@ import org.springframework.stereotype.Component;
 
 import de.openaqua.ipsc.entities.Club;
 import de.openaqua.ipsc.entities.Competition;
-import de.openaqua.ipsc.entities.CompetitionType;
-import de.openaqua.ipsc.entities.CountryType;
-import de.openaqua.ipsc.entities.DevisionType;
-import de.openaqua.ipsc.entities.OpenType;
+import de.openaqua.ipsc.entities.Registration;
 import de.openaqua.ipsc.reps.ClubsRepository;
 import de.openaqua.ipsc.reps.CompetitionRepository;
+import de.openaqua.ipsc.reps.RegistrationsRepository;
+import de.openaqua.ipsc.types.CompetitionType;
+import de.openaqua.ipsc.types.CountryType;
+import de.openaqua.ipsc.types.DevisionType;
+import de.openaqua.ipsc.types.OpenType;
 
 @Component
 public class SampleCreator {
@@ -105,6 +107,18 @@ public class SampleCreator {
 
 	}
 
+	@Autowired
+	RegistrationsRepository regRep;
+
+	public void createSampleRegistrations() {
+		Registration a = new Registration();
+		a.registrationDate = new Date();
+		a.shooterId = "abcdef";
+		a.competitionId = "fgeadf";
+		regRep.save(a);
+
+	}
+
 	public void run(String... args) throws Exception {
 
 	}
@@ -112,6 +126,7 @@ public class SampleCreator {
 	public void createSampleData() {
 		createSampleCompetition();
 		createSampleClubs();
+		createSampleRegistrations();
 	}
 
 }

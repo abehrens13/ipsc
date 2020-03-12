@@ -1,10 +1,13 @@
 package de.openaqua.ipsc.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import de.openaqua.ipsc.types.CountryType;
 
 @Document("Shooter")
 public class Shooter {
@@ -36,8 +39,12 @@ public class Shooter {
 
 	public List<Weapon> weapons;
 
+	public List<Club> clubs;
+
 	public Shooter() {
 		super();
+		weapons = new ArrayList<Weapon>();
+		clubs = new ArrayList<Club>();
 	}
 
 }

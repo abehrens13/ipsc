@@ -2,6 +2,9 @@ package de.openaqua.ipsc.entities;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import de.openaqua.ipsc.types.DevisionType;
+import de.openaqua.ipsc.types.PowerFactorType;
+
 @Document("Weapons")
 public class Weapon {
 	public String id;

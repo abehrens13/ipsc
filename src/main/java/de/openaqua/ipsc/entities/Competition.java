@@ -1,5 +1,6 @@
 package de.openaqua.ipsc.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import de.openaqua.ipsc.types.CompetitionType;
+import de.openaqua.ipsc.types.CountryType;
+import de.openaqua.ipsc.types.DevisionType;
+import de.openaqua.ipsc.types.OpenType;
 
 @Document("Competitions")
 public class Competition {
@@ -48,5 +54,10 @@ public class Competition {
 	public int berths;
 
 	public OpenType openFor;
+
+	public Competition() {
+		super();
+		devisionType = new ArrayList<DevisionType>();
+	}
 
 }

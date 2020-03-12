@@ -1,4 +1,4 @@
-package de.openaqua.ipsc.entities;
+package de.openaqua.ipsc.types;
 
 
 public enum DevisionType {
