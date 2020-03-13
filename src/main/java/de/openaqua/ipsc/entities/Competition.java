@@ -64,6 +64,7 @@ public class Competition {
 	}
 
 	public int getLoad() {
+		//TODO: Needs to be calculated!
 		return 143;
 	}
 
