@@ -63,4 +63,8 @@ public class Competition {
 		this.openFor = OpenType.CLUB;
 	}
 
+	public int getLoad() {
+		return 143;
+	}
+
 }
