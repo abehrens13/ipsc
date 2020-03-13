@@ -5,16 +5,15 @@ import org.jgrapht.alg.shortestpath.AStarShortestPath;
 
 public class AStarShortestPathIntern extends AStarShortestPath<City, Street> {
 
-	private VehicleType type=null;
+	//private VehicleType type=null;
 
 	public AStarShortestPathIntern(Graph<City, Street> graph, VehicleType type) {
 		super(graph, new AStarAdmissibleHeuristicCity());
-		this.type = type;
+		//this.type = type;
 	}
 
 	@Override
 	public double getPathWeight(City source, City sink) {
-		// TODO Auto-generated method stub
 		// Graph<City, Street> graph = (Graph<City, Street>) getPath(source, sink);
 		// graph.getAllEdges(sourceVertex, targetVertex)
 		double foo = super.getPathWeight(source, sink);
