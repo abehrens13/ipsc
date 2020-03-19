@@ -29,6 +29,7 @@ public abstract class IIpscController<T> {
 	public Optional<T> byId(@PathVariable final String id) {
 		LOG.info("GET /byId/{id}");
 		return getRepository().findById(id);
+		
 	}
 
 	@DeleteMapping("/delete/{id}")
