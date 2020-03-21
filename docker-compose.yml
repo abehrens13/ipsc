@@ -1,0 +1,18 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    restart: on-failure
+  mongoclient:
+    image: mongoclient/mongoclient
+    restart: on-failure
+    ports:
+    - 3000:3000
+    environment:
+      MONGO_URL: mongodb://mongo:27017/mydb
+      MONGOCLIENT_DEFAULT_CONNECTION_URL: mongodb://mongo:27017/mydb
+  backend:
+    build: .
+    restart: 'no'
+    ports:
+    - 8080:8080

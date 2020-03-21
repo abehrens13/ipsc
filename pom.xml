@@ -112,9 +112,7 @@
 												</plugin>
 												<!-- Docker integration -->
 												<!-- https://github.com/fabric8io/docker-maven-plugin/blob/master/doc/intro.md -->
-												<!-- for now: -->
-												<!-- docker build -t feb18/backend:latest . -->
-												<!-- docker run -name backend -p 8080:8080 feb18/backend -->
+												<!-- for now: look into readme-->
 												<!-- <plugin> <groupId>io.fabric8</groupId> <artifactId>docker-maven-plugin</artifactId> 
 																<version>0.33.0</version> <configuration> <images> <image> <alias>backend</alias> 
 																<name>openaqua/ipscBackend:${project.version}</name> <build> <from>java:8</from> 
