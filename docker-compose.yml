@@ -7,7 +7,7 @@ services:
     image: mongoclient/mongoclient
     restart: 'no'
     ports:
-    - 3000:3000
+    - 4000:3000
     environment:
       MONGO_URL: mongodb://mongo:27017/mydb
       MONGOCLIENT_DEFAULT_CONNECTION_URL: mongodb://mongo:27017/mydb
