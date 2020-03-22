@@ -1,0 +1,1 @@
+the docker directory shall not be removed. It is required by the docker maven plugin

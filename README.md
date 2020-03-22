@@ -9,3 +9,9 @@
  - docker-compose up -d 
  - docker-compose down 
 
+
+## maven build
+mvn clean install
+mvn docker:build
+mvn docker:start
+mvn docker:stop

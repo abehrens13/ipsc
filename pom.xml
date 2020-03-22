@@ -110,12 +110,19 @@
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
       <!-- Docker integration -->
-      <!-- https://github.com/fabric8io/docker-maven-plugin/blob/master/doc/intro.md -->
-      <!-- for now: look into readme -->
+      <!-- http://dmp.fabric8.io/ -->
       <plugin>
         <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
         <version>0.33.0</version>
+        <executions>
+          <execution>
+            <id>docker-build</id>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
         <configuration>
           <images>
             <image>
