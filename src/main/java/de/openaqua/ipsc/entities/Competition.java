@@ -11,7 +11,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import de.openaqua.ipsc.types.CompetitionType;
-import de.openaqua.ipsc.types.CountryType;
 import de.openaqua.ipsc.types.DevisionType;
 import de.openaqua.ipsc.types.OpenType;
 
@@ -20,20 +19,15 @@ public class Competition {
 	@Id
 	public String id;
 
-	@NotNull
 	public CompetitionType competitionType;
 
-	@NotNull
 	public List<DevisionType> devisionType;
 
-	@NotNull
-	public CountryType country;
+	public String country;
 
-	@NotNull
 	@DateTimeFormat(iso = ISO.DATE)
 	public Date dateStart;
 
-	@NotNull
 	@DateTimeFormat(iso = ISO.DATE)
 	public Date dateEnd;
 
@@ -59,12 +53,12 @@ public class Competition {
 		super();
 		devisionType = new ArrayList<DevisionType>();
 		this.competitionType = CompetitionType.IPSCHandgun;
-		this.country = CountryType.DE;
+		this.country = "DE";
 		this.openFor = OpenType.CLUB;
 	}
 
 	public int getLoad() {
-		//TODO: Needs to be calculated!
+		// TODO: Needs to be calculated!
 		return 143;
 	}
 

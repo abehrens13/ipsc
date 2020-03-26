@@ -3,11 +3,8 @@ package de.openaqua.ipsc.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import de.openaqua.ipsc.types.CountryType;
 
 @Document("Shooters")
 public class Shooter {
@@ -15,38 +12,35 @@ public class Shooter {
 	@Id
 	public String id;
 
-	@NotNull
-	public String username;
+	public String name;
 
-	@NotNull
-	public String password;
-
-	@NotNull
-	public String firstname;
-
-	@NotNull
-	public String lastname;
-
-	@NotNull
 	public String email;
 
-	@NotNull
-	public CountryType country;
+	public String password;
 
-	public String ipsc_licence;
+	public String country;
+
+	public String ipscLicence;
 
 	public Address address;
 
 	public List<Weapon> weapons;
 
-	public List<String> clubs_id;
+	public List<String> clubs;
 
 	public Shooter() {
 		super();
-		this.weapons = new ArrayList<Weapon>();
-		this.clubs_id = new ArrayList<String>();
+		this.weapons = new ArrayList<>();
+		this.clubs = new ArrayList<>();
 		this.address = new Address();
-		this.country = CountryType.DE;
+		this.country = "DE";
+	}
+
+	@Override
+	public String toString() {
+		return "Shooter [id=" + id + ", password=" + password + ", name=" + name + ", email=" + email + ", country="
+				+ country + ", ipsc_licence=" + ipscLicence + ", address=" + address + ", weapons=" + weapons
+				+ ", clubs_id=" + clubs + "]";
 	}
 
 }

@@ -11,7 +11,7 @@ import de.openaqua.ipsc.reps.RegistrationsRepository;
 
 @RestController
 @RequestMapping(path = "/api/registrations")
-public class RegistrationsController extends IIpscController<Registration> {
+public class RegistrationsController extends IipscController<Registration> {
 	Logger LOG = LoggerFactory.getLogger(RegistrationsController.class);
 
 	public RegistrationsController(RegistrationsRepository repository){

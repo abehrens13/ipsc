@@ -8,7 +8,7 @@ import de.openaqua.ipsc.entities.Club;
 
 @RestController
 @RequestMapping(path = "/api/clubs")
-public class ClubsController extends IIpscController<Club> {
+public class ClubsController extends IipscController<Club> {
 
 	public ClubsController(MongoRepository<Club, String> repository) {
 		super(repository);

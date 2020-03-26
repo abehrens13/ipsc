@@ -15,48 +15,48 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-public abstract class IIpscController<T> {
-	Logger LOG = LoggerFactory.getLogger(IIpscController.class);
+public abstract class IipscController<T> {
+	Logger log = LoggerFactory.getLogger(IipscController.class);
 
 	@GetMapping("/")
 	public List<T> index() {
-		LOG.info("GET /" );
+		log.info("GET /" );
 		return getRepository().findAll();
 
 	}
 
 	@GetMapping("/byId/{id}")
 	public Optional<T> byId(@PathVariable final String id) {
-		LOG.info("GET /byId/{id}");
+		log.info("GET /byId/{id}");
 		return getRepository().findById(id);
 		
 	}
 
 	@DeleteMapping("/delete/{id}")
 	public void delObject(@PathVariable final String id) {
-		LOG.info("DELETE /delete/{id}");
+		log.info("DELETE /delete/{id}");
 		getRepository().deleteById(id);
 	}
 
 	@GetMapping("/new")
 	public T newObject() {
-		LOG.info("GET /new");
+		log.info("GET /new");
 		return getNew();
 	}
 
 	@PatchMapping("/save")
 	public T patchObject(@RequestBody T c) {
-		LOG.info("PATCH /save");
+		log.info("PATCH /save");
 		return getRepository().save(c);
 	}
 
 	@SuppressWarnings("unused")
-	private IIpscController() {
+	private IipscController() {
 		super();
 	}
 
 	private MongoRepository<T, String> repository;
-	public IIpscController(MongoRepository<T, String> repository) {
+	public IipscController(MongoRepository<T, String> repository) {
 		super();
 		this.repository = repository;
 	}

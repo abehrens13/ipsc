@@ -20,14 +20,13 @@ import de.openaqua.ipsc.reps.CompetitionRepository;
 import de.openaqua.ipsc.reps.RegistrationsRepository;
 import de.openaqua.ipsc.reps.ShootersRepository;
 import de.openaqua.ipsc.types.CompetitionType;
-import de.openaqua.ipsc.types.CountryType;
 import de.openaqua.ipsc.types.DevisionType;
 import de.openaqua.ipsc.types.OpenType;
 import de.openaqua.ipsc.types.PowerFactorType;
 
 @Component
 public class SampleCreator {
-	Logger LOG = LoggerFactory.getLogger(SampleCreator.class);
+	Logger log = LoggerFactory.getLogger(SampleCreator.class);
 
 	@Autowired
 	CompetitionRepository repository;
@@ -54,10 +53,10 @@ public class SampleCreator {
 		a.name = "High Noon Bonn";
 		a.website = "https://www.google.com";
 		a.email = "sample@boom.com";
-		a.address.street = "Shooters Street 1";
-		a.address.city = "Bonn";
-		a.address.postCode = "12345";
-		a.address.country = CountryType.DE;
+		a.address.setStreet("Shooters Street 1");
+		a.address.setCity("Bonn");
+		a.address.setCountry("DE");
+		a.address.setPostCode("12456");
 		clubsRepository.save(a);
 
 		a.id = null;
@@ -66,19 +65,21 @@ public class SampleCreator {
 
 		a.id = null;
 		a.name = "Black Gun";
-		a.address.city = "Heidenau";
-		a.address.postCode = "45678";
+		a.address.setStreet("Shooters Street 1");
+		a.address.setCity("Heidenau");
+		a.address.setCountry("DE");
+		a.address.setPostCode("65432");
 		clubsRepository.save(a);
 
 	}
 
 	public void createSampleCompetition() {
-		List<DevisionType> standard = new ArrayList<DevisionType>();
+		List<DevisionType> standard = new ArrayList<>();
 		standard.add(DevisionType.CLASSIC);
 		standard.add(DevisionType.STANDARD);
 		standard.add(DevisionType.RIMFIRE);
 
-		List<DevisionType> production = new ArrayList<DevisionType>();
+		List<DevisionType> production = new ArrayList<>();
 		production.add(DevisionType.PRODUCTION);
 		production.add(DevisionType.PRODUCTION_OPTICS);
 
@@ -86,7 +87,7 @@ public class SampleCreator {
 		test.berths = 80;
 		test.bulletCounts = 120;
 		test.competitionType = CompetitionType.IPSCHandgun;
-		test.country = CountryType.DE;
+		test.country = "DE";
 		test.dateStart = getDate("2020-01-01");
 		test.dateEnd = getDate("2020-01-02");
 		test.devisionType = standard;
@@ -136,37 +137,34 @@ public class SampleCreator {
 
 	public void createSampleShooters() {
 		Shooter a = new Shooter();
-		a.country = CountryType.DE;
-		a.address.city = "Bonn";
-		a.address.country = CountryType.DE;
-		a.address.postCode = "12456";
+		a.country = "DE";
+		a.address.setCity("Bonn");
+		a.address.setCountry("DE");
+		a.address.setPostCode("12456");
 		a.email = "foo@nowhere.com";
-		a.firstname = "Tom";
-		a.lastname = "Sawyer";
+		a.name = "Tom Sawyer";
 		a.password = "xxx";
-		a.username = "tom.saw";
-		a.ipsc_licence = "1241231";
+		a.ipscLicence = "1241231";
 
 		Weapon b = new Weapon();
-		b.caliber = "9mm Luger";
-		b.gunType = "Walther PPQ Q4";
-		b.powerFactor = PowerFactorType.MINOR;
-		b.prefDevisionType = DevisionType.PRODUCTION_OPTICS;
-		b.serialNumber = "ABC01234";
-		Weapon c = new Weapon();
-		c.caliber = "9mm Luger";
-		c.gunType = "Walther PPQ Q5";
-		c.powerFactor = PowerFactorType.MINOR;
-		c.prefDevisionType = DevisionType.PRODUCTION;
-		c.serialNumber = "ABC012342";
+		b.setCaliber("9mm Luger");
+		b.setGunType("Walther PPQ Q4");
+		b.setPowerFactor(PowerFactorType.MINOR);
+		b.setPrefDevisionType(DevisionType.PRODUCTION_OPTICS);
+		b.setSerialNumber("ABC01234");
 
 		a.weapons.add(b);
-		a.weapons.add(c);
 
+		shootersRep.save(a);
+
+		a.id = null;
+		a.name = "User Name";
+		a.email = "foobar@openaqua.de";
 		shootersRep.save(a);
 	}
 
 	public void createSampleData() {
+		shootersRep.deleteAll();
 		createSampleCompetition();
 		createSampleClubs();
 		createSampleRegistrations();

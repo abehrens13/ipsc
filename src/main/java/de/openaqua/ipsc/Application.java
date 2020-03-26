@@ -7,11 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Application {
-	private final static Log LOG = LogFactory.getLog(Application.class);
+	private static final Log LOG = LogFactory.getLog(Application.class);
 
 	public static void main(String... args) {
 		LOG.debug("Application::main()");
 		SpringApplication.run(Application.class, args);
 	}
-
 }
