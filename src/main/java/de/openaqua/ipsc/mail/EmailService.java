@@ -89,7 +89,7 @@ public class EmailService {
 	public void sendNewShooterRegistrationMail(final Shooter s) {
 		// TODO: needs to be defined...
 		String from = "test@localhost.com";
-		String to = s.email;
+		String to = s.getEmail();
 		String subject = "Neu-Registrierung";
 
 		/*

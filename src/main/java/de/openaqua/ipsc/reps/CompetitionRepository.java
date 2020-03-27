@@ -11,5 +11,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 @Repository
 public interface CompetitionRepository extends MongoRepository<Competition, String> {
 	public Optional<Competition> findById(String id);
+
 	public List<Competition> findByCompetitionType(String type);
 }

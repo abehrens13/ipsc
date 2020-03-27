@@ -74,41 +74,6 @@ public class SampleCreator {
 	}
 
 	public void createSampleCompetition() {
-		List<DevisionType> standard = new ArrayList<>();
-		standard.add(DevisionType.CLASSIC);
-		standard.add(DevisionType.STANDARD);
-		standard.add(DevisionType.RIMFIRE);
-
-		List<DevisionType> production = new ArrayList<>();
-		production.add(DevisionType.PRODUCTION);
-		production.add(DevisionType.PRODUCTION_OPTICS);
-
-		Competition test = new Competition();
-		test.berths = 80;
-		test.bulletCounts = 120;
-		test.competitionType = CompetitionType.IPSCHandgun;
-		test.country = "DE";
-		test.dateStart = getDate("2020-01-01");
-		test.dateEnd = getDate("2020-01-02");
-		test.devisionType = standard;
-		test.level = "1";
-		test.openFor = OpenType.INTERNATIONAL;
-		test.regOpen = getDate("2019-12-01");
-		test.regClose = getDate("2019-12-31");
-		test.title = "Ready for Beginners";
-		repository.save(test);
-
-		test.title = "Ready for Advanced";
-		test.devisionType = production;
-
-		repository.save(test);
-		repository.save(test);
-		repository.save(test);
-		repository.save(test);
-		repository.save(test);
-		repository.save(test);
-		repository.save(test);
-		repository.save(test);
 
 	}
 
@@ -136,31 +101,6 @@ public class SampleCreator {
 	ShootersRepository shootersRep;
 
 	public void createSampleShooters() {
-		Shooter a = new Shooter();
-		a.country = "DE";
-		a.address.setCity("Bonn");
-		a.address.setCountry("DE");
-		a.address.setPostCode("12456");
-		a.email = "foo@nowhere.com";
-		a.name = "Tom Sawyer";
-		a.password = "xxx";
-		a.ipscLicence = "1241231";
-
-		Weapon b = new Weapon();
-		b.setCaliber("9mm Luger");
-		b.setGunType("Walther PPQ Q4");
-		b.setPowerFactor(PowerFactorType.MINOR);
-		b.setPrefDevisionType(DevisionType.PRODUCTION_OPTICS);
-		b.setSerialNumber("ABC01234");
-
-		a.weapons.add(b);
-
-		shootersRep.save(a);
-
-		a.id = null;
-		a.name = "User Name";
-		a.email = "foobar@openaqua.de";
-		shootersRep.save(a);
 	}
 
 	public void createSampleData() {
