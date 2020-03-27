@@ -13,13 +13,13 @@ public class CreateSampleData implements CommandLineRunner {
 	@Autowired
 	SampleCreator sampleCreator;
 
-  public static void main(String[] args) {
+	public static void main(String[] args) {
 		SpringApplication.run(CreateSampleData.class, args);
-  }
+	}
 
-  @Override
-  public void run(String... args) throws Exception {
-	  sampleCreator.createSampleData();
-	  
-  }
+	@Override
+	public void run(String... args) throws Exception {
+		sampleCreator.createSampleData();
+
+	}
 }
