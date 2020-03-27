@@ -76,6 +76,6 @@ public abstract class AbstractIpscController<T> {
 		return this.repository;
 	}
 
-	abstract protected T getNew();
+	protected abstract T getNew();
 
 }

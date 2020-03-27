@@ -26,8 +26,8 @@ public class Club {
 
 	public Club() {
 		super();
-		this.competitions = new ArrayList<String>();
-		this.members = new ArrayList<String>();
+		this.competitions = new ArrayList<>();
+		this.members = new ArrayList<>();
 		this.address = new Address();
 	}
 }

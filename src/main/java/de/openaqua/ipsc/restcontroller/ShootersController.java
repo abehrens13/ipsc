@@ -70,7 +70,7 @@ public class ShootersController extends AbstractIpscController<Shooter> {
 		// some preps and create new Shooter
 		in.setPassword(org.apache.commons.codec.digest.DigestUtils.sha256Hex(in.getPassword()));
 		in.setEmail(in.getEmail().toLowerCase());
-		in.setDsgvo_date(Date.from(Instant.now()));
+		in.setDsgvoDate(Date.from(Instant.now()));
 		Shooter out = getRepository().save(in);
 		log.debug("New Shooter with ID {} created", out.getId());
 		emailService.sendNewShooterRegistrationMail(out);

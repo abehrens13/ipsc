@@ -25,7 +25,7 @@ public class Shooter {
 	private List<String> clubs;
 	private boolean dsgvo;
 	@DateTimeFormat(iso = ISO.DATE_TIME)
-	private Date dsgvo_date;
+	private Date dsgvoDate;
 
 	public Shooter() {
 		super();
@@ -123,19 +123,19 @@ public class Shooter {
 		this.dsgvo = dsgvo;
 	}
 
-	public Date getDsgvo_date() {
-		return dsgvo_date;
+	public Date getDsgvoDate() {
+		return dsgvoDate;
 	}
 
-	public void setDsgvo_date(Date dsgvo_date) {
-		this.dsgvo_date = dsgvo_date;
+	public void setDsgvoDate(Date dsgvoDate) {
+		this.dsgvoDate = dsgvoDate;
 	}
 
 	@Override
 	public String toString() {
 		return "Shooter [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", country="
 				+ country + ", association=" + association + ", ipscLicence=" + ipscLicence + ", address=" + address
-				+ ", weapons=" + weapons + ", clubs=" + clubs + ", dsgvo=" + dsgvo + ", dsgvo_date=" + dsgvo_date + "]";
+				+ ", weapons=" + weapons + ", clubs=" + clubs + ", dsgvo=" + dsgvo + ", dsgvo_date=" + dsgvoDate + "]";
 	}
 
 }
