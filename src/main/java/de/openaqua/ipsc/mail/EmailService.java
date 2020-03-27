@@ -1,9 +1,5 @@
 package de.openaqua.ipsc.mail;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -87,7 +83,7 @@ public class EmailService {
 	}
 
 	public void sendNewShooterRegistrationMail(final Shooter s) {
-		//TODO: needs to be defined...
+		// TODO: needs to be defined...
 		String from = "test@localhost.com";
 		String to = s.email;
 		String subject = "Neu-Registrierung";
