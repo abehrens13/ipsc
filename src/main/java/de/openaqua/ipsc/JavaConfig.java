@@ -2,6 +2,8 @@ package de.openaqua.ipsc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.stereotype.Component;
 
 import de.openaqua.ipsc.beans.SerialGenerator;
@@ -10,6 +12,18 @@ import de.openaqua.ipsc.landscape.Landscape;
 
 @Component
 public class JavaConfig {
+	
+	
+	/**
+	 * Return (and create) a MongoDB Transaction Manager.
+	 * 
+	 * @param dbFactory
+	 * @return
+	 */
+	@Bean
+	MongoTransactionManager txManager(MongoDbFactory dbFactory) {
+		return new MongoTransactionManager(dbFactory);
+	}
 
 	@Bean
 	public SerialGenerator serialGenerator() {

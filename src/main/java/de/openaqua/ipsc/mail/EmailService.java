@@ -59,7 +59,9 @@ public class EmailService {
 		}
 
 		log.info("sendHtmlMail from <{}> to <{}>", eParams.getFrom(), eParams.getTo());
-		mailSender.send(message);
+		log.error("Email-Service still under construction email to <{}> NOT sent", eParams.getTo());
+		// TODO: Fix this:
+		// mailSender.send(message);
 	}
 
 	private void sendPlainTextMail(Email eParams) {
@@ -78,7 +80,9 @@ public class EmailService {
 		}
 
 		log.info("sendPlainTextMailfrom <{}> to <{}>", eParams.getFrom(), eParams.getTo());
-		mailSender.send(mailMessage);
+		log.error("Email-Service still under construction email to <{}> NOT sent", eParams.getTo());
+		// TODO: Fix this:
+		// mailSender.send(mailMessage);
 
 	}
 

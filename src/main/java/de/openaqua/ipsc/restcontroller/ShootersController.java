@@ -1,10 +1,13 @@
 package de.openaqua.ipsc.restcontroller;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +19,7 @@ import de.openaqua.ipsc.reps.ShootersRepository;
 
 @RestController
 @RequestMapping(path = "/api/shooters")
-public class ShootersController extends IipscController<Shooter> {
+public class ShootersController extends AbstractIpscController<Shooter> {
 
 	public ShootersController(ShootersRepository repository) {
 		super(repository);
@@ -47,29 +50,31 @@ public class ShootersController extends IipscController<Shooter> {
 		}
 	}
 
+	
 	@Override
 	@PostMapping(path = "/new", consumes = "application/json", produces = "application/json")
+	@Transactional
 	public Shooter createNewObject(@RequestBody Shooter in) {
 		log.info("POST /new for email {}", in.email);
 
-		// Test email
+		// some tests
 		if (in.email == null || in.email.length() == 0) {
 			throw new IncompleteDataException("Shooter Data are incomplete: Missing Email");
 		}
-
-		// check for existing shooter with same email
-		if (shootersRepository.findShooterByEmail(in.email).isPresent()) {
+		if (shootersRepository.findShooterByEmail(in.email.toLowerCase()).isPresent()) {
 			throw new IncompleteDataException("There is already a shooter with email address <" + in.email + ">");
 		}
+		if (!in.dsgvo) {
+			throw new IncompleteDataException("DSGVO flag must be true");
+		}
 
-		// create new Shooter
+		// some preps and create new Shooter
 		in.password = org.apache.commons.codec.digest.DigestUtils.sha256Hex(in.password);
+		in.email = in.email.toLowerCase();
+		in.dsgvo_date = Date.from(Instant.now());
 		Shooter out = getRepository().save(in);
 		log.debug("New Shooter with ID {} created", out.id);
-
-		// send welcome message
-		// TODO: email-service needs to be defined...
-		// emailService.sendNewShooterRegistrationMail(out);
+		emailService.sendNewShooterRegistrationMail(out);
 		return out;
 	}
 

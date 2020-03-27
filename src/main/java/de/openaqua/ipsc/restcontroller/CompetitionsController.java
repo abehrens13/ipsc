@@ -7,7 +7,7 @@ import de.openaqua.ipsc.entities.Competition;
 
 @RestController
 @RequestMapping(path = "/api/competitions")
-public class CompetitionsController extends IipscController<Competition> {
+public class CompetitionsController extends AbstractIpscController<Competition> {
 
 	public CompetitionsController(MongoRepository<Competition, String> repository) {
 		super(repository);
