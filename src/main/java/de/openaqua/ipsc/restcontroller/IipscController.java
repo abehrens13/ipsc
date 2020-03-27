@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +28,7 @@ public abstract class IipscController<T> {
 
 	@GetMapping("/byId/{id}")
 	public Optional<T> byId(@PathVariable final String id) {
-		log.info("GET /byId/{id}");
+		log.info("GET /byId/{}",id);
 		return getRepository().findById(id);
 		
 	}
@@ -44,6 +45,13 @@ public abstract class IipscController<T> {
 		return getNew();
 	}
 
+	@PostMapping(path = "/new", consumes = "application/json", produces = "application/json")
+	public T createNewObject(@RequestBody T c) {
+		log.info("POST /new");
+		return getRepository().save(c);
+	}
+
+	
 	@PatchMapping("/save")
 	public T patchObject(@RequestBody T c) {
 		log.info("PATCH /save");
