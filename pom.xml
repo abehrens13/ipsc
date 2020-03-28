@@ -140,6 +140,21 @@
               </run>
             </image>
             <image>
+              <alias>mongo-express</alias>
+              <name>mongo-express</name>
+              <run>
+                <links>
+                  <link>mongo</link>
+                </links>
+                <ports>
+                  <port>4001:8081</port>
+                </ports>
+                <dependsOn>
+                  <container>mongo</container>
+                </dependsOn>
+              </run>
+            </image>
+            <image>
               <alias>mongo_client</alias>
               <name>mongoclient/mongoclient</name>
               <run>

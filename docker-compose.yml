@@ -3,6 +3,11 @@ services:
   mongo:
     image: mongo
     restart: on-failure
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+    - 4001:8081
   mongoclient:
     image: mongoclient/mongoclient
     restart: 'no'
