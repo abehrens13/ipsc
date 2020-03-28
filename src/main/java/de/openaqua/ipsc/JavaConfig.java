@@ -1,8 +1,6 @@
 package de.openaqua.ipsc;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.MongoTransactionManager;
 import org.springframework.stereotype.Component;
 
 import de.openaqua.ipsc.beans.SerialGenerator;
@@ -16,10 +14,11 @@ public class JavaConfig {
 	 * @param dbFactory
 	 * @return
 	 */
-	@Bean
-	MongoTransactionManager txManager(MongoDbFactory dbFactory) {
-		return new MongoTransactionManager(dbFactory);
-	}
+	//TODO: Transactional Manager for MongoDB seems to be broken...
+	//@Bean
+	//MongoTransactionManager txManager(MongoDbFactory dbFactory) {
+	//	return new MongoTransactionManager(dbFactory);
+	//}
 
 	@Bean
 	public SerialGenerator serialGenerator() {
