@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Document
 
-public class Shooter {
+public class Shooter implements IDocument {
 
 	@Id
 	private String id;

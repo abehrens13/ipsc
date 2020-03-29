@@ -13,7 +13,7 @@ import de.openaqua.ipsc.types.DevisionType;
 import de.openaqua.ipsc.types.OpenType;
 
 @Document("Competitions")
-public class Competition {
+public class Competition implements IDocument {
 	@Id
 	private String id;
 

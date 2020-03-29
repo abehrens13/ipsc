@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import de.openaqua.ipsc.entities.Club;
-import de.openaqua.ipsc.entities.Registration;
 import de.openaqua.ipsc.reps.ClubsRepository;
 import de.openaqua.ipsc.reps.CompetitionRepository;
 import de.openaqua.ipsc.reps.RegistrationsRepository;
@@ -25,6 +24,12 @@ public class SampleCreator {
 	@Autowired
 	ClubsRepository clubsRepository;
 
+	@Autowired
+	RegistrationsRepository regRep;
+
+	@Autowired
+	ShootersRepository shootersRep;
+
 	SampleCreator() {
 		super();
 	}
@@ -34,33 +39,12 @@ public class SampleCreator {
 		try {
 			return formatter.parse(date);
 		} catch (ParseException e) {
-			e.printStackTrace();
+			log.error(e.toString());
 			return null;
 		}
 	}
 
 	public void createSampleClubs() {
-		Club a = new Club();
-		a.name = "High Noon Bonn";
-		a.website = "https://www.google.com";
-		a.email = "sample@boom.com";
-		a.address.setStreet("Shooters Street 1");
-		a.address.setCity("Bonn");
-		a.address.setCountry("DE");
-		a.address.setPostCode("12456");
-		clubsRepository.save(a);
-
-		a.id = null;
-		a.name = "High Noon Guests";
-		clubsRepository.save(a);
-
-		a.id = null;
-		a.name = "Black Gun";
-		a.address.setStreet("Shooters Street 1");
-		a.address.setCity("Heidenau");
-		a.address.setCountry("DE");
-		a.address.setPostCode("65432");
-		clubsRepository.save(a);
 
 	}
 
@@ -68,39 +52,24 @@ public class SampleCreator {
 		// for later
 	}
 
-	@Autowired
-	RegistrationsRepository regRep;
-
 	public void createSampleRegistrations() {
-		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
-		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
-		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
-		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
-		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
-		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
-		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
-		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
-		regRep.save(new Registration("shooterSampleId", "competitionSampleId"));
-
-	}
-
-	public void run(String... args) throws Exception {
 		// for later
 	}
-
-	@Autowired
-	ShootersRepository shootersRep;
 
 	public void createSampleShooters() {
 		// for later
 	}
 
-	public void createSampleData() {
+	public void deleteOldData() {
+		log.info("deleteOldData()");
 		shootersRep.deleteAll();
+	}
+
+	public void createSampleData() {
+		log.info("createSampleData()");
 		createSampleCompetition();
 		createSampleClubs();
 		createSampleRegistrations();
 		createSampleShooters();
 	}
-
 }

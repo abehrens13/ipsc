@@ -59,7 +59,7 @@ public class EmailService {
 		}
 
 		log.info("sendHtmlMail from <{}> to <{}>", eParams.getFrom(), eParams.getTo());
-		log.error("Email-Service still under construction email to <{}> NOT sent", eParams.getTo());
+		log.error("Email-Service still under construction email, to <{}> NOT sent", eParams.getTo());
 		// TODO: Fix this:
 		// mailSender.send(message);
 	}
@@ -80,13 +80,14 @@ public class EmailService {
 		}
 
 		log.info("sendPlainTextMailfrom <{}> to <{}>", eParams.getFrom(), eParams.getTo());
-		log.error("Email-Service still under construction email to <{}> NOT sent", eParams.getTo());
+		log.error("Email-Service still under construction, email to <{}> NOT sent", eParams.getTo());
 		// TODO: Fix this:
 		// mailSender.send(mailMessage);
 
 	}
 
 	public void sendNewShooterRegistrationMail(final Shooter s) {
+		log.info("sendNewShooterRegistrationMail to <{}>", s.getEmail());
 		// TODO: needs to be defined...
 		String from = "test@localhost.com";
 		String to = s.getEmail();
