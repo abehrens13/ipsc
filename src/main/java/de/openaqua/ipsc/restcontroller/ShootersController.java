@@ -2,6 +2,9 @@ package de.openaqua.ipsc.restcontroller;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import javax.validation.Valid;
 
@@ -10,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,7 +29,8 @@ import de.openaqua.ipsc.reps.ShootersRepository;
 @RestController
 @RequestMapping(path = "/api/shooters")
 public class ShootersController extends AbstractIpscController<Shooter> {
-	Logger Log = LoggerFactory.getLogger(ShootersController.class);
+	private Logger log = LoggerFactory.getLogger(ShootersController.class);
+	private static String cErrorMessage1 = "Shooter Data are incomplete: Missing Email";
 
 	@Autowired
 	private EmailService emailService;
@@ -43,22 +48,39 @@ public class ShootersController extends AbstractIpscController<Shooter> {
 		return new Shooter();
 	}
 
-	@PostMapping(path = "?resetPassword", consumes = "application/json", produces = "application/json")
-	public void resetPassword(@RequestBody @Valid Shooter in) {
-		log.info("POST /resetPassword for {}", in);
+	@PostMapping(path = "/resetPassword", consumes = "application/json", produces = "application/json")
+	public Map<String, Boolean> resetPassword(@RequestBody @Valid Shooter in) {
+		log.info("GET /resetPassword for {}", in);
 		Optional<Shooter> out = shootersRepository.findShooterByEmail(in.getEmail());
 
 		if (out.isPresent()) {
 			log.debug("Found Shooter: {}", out.get());
+			emailService.sendPasswordResetMail(out.get().getEmail());
 			log.error("don't know how to send Mail to {}", out.get().getEmail());
 		} else {
 			log.error("POST /resetPassword: Shooter Not Found for Mail: {}", in.getEmail());
 		}
+
+		Map<String, Boolean> response = new HashMap<>();
+		response.put("done", Boolean.TRUE);
+		return response;
+
+	}
+
+	private static boolean notNullOrEmpty(final String test) {
+		return !(test == null || test.isEmpty());
+	}
+
+	private static boolean notNullOrEmpty(@SuppressWarnings("rawtypes") final List test) {
+		return !(test == null || test.isEmpty());
 	}
 
 	@Override
-	public ResponseEntity<Shooter> patch(String id, @Valid Shooter c) {
-		Log.info("Patch Shooter for id {}", id);
+	@PatchMapping("/{id}")
+	@Transactional
+	public ResponseEntity<Shooter> patch(@PathVariable(value = "id") final String id,
+			final @Valid @RequestBody Shooter c) {
+		log.info("Patch Shooter for id {}", id);
 		Shooter tmp = voidtestObjectId(id, c);
 		if (!c.isDsgvo()) {
 			throw new IncompleteDataException("DSGVO-Flat cannot be removed");
@@ -68,38 +90,39 @@ public class ShootersController extends AbstractIpscController<Shooter> {
 			tmp.setAddress(c.getAddress());
 		}
 
-		if (!c.getAssociation().isEmpty()) {
+		if (notNullOrEmpty(c.getAssociation())) {
 			tmp.setAssociation(c.getAssociation());
 		}
-		if (c.getClubs() != null && !c.getClubs().isEmpty()) {
+		if (notNullOrEmpty(c.getClubs())) {
 			// TODO: Patch for single clubs necessary?
 			tmp.setClubs(c.getClubs());
 		}
 		if (c.getDsgvoDate() != null) {
 			tmp.setDsgvoDate(c.getDsgvoDate());
 		}
-		if (!c.getEmail().isEmpty()) {
+		if (notNullOrEmpty(c.getEmail())) {
 			tmp.setEmail(c.getEmail());
 		}
-		if (!c.getIpscLicence().isEmpty()) {
+		if (notNullOrEmpty(c.getIpscLicence())) {
 			tmp.setIpscLicence(c.getIpscLicence());
 		}
-		if (!c.getName().isEmpty()) {
+		if (notNullOrEmpty(c.getName())) {
 			tmp.setName(c.getName());
 		}
-		if (!c.getCountry().isEmpty()) {
+		if (notNullOrEmpty(c.getCountry())) {
 			tmp.setCountry(c.getCountry());
 		}
-		if (!c.getPassword().isEmpty()) {
+		if (notNullOrEmpty(c.getPassword())) {
 			tmp.setPassword(makeHashedPassword(c.getPassword()));
 		}
-		if (c.getWeapons() != null && !c.getWeapons().isEmpty()) {
+		if (notNullOrEmpty(c.getWeapons())) {
 			// TODO: Patch for single weapons necessary?
 			tmp.setWeapons(c.getWeapons());
 		}
 		return put(id, tmp);
 	}
 
+	@Override
 	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<Shooter> put(@PathVariable(value = "id") String id, @Valid @RequestBody Shooter in) {
@@ -107,7 +130,7 @@ public class ShootersController extends AbstractIpscController<Shooter> {
 
 		// some tests
 		if (in.getEmail() == null || in.getEmail().length() == 0) {
-			throw new IncompleteDataException("Shooter Data are incomplete: Missing Email");
+			throw new IncompleteDataException(cErrorMessage1);
 		}
 		if (!in.isDsgvo()) {
 			throw new IncompleteDataException("DSGVO flag must be true");
@@ -128,7 +151,7 @@ public class ShootersController extends AbstractIpscController<Shooter> {
 
 		// some tests
 		if (in.getEmail() == null || in.getEmail().length() == 0) {
-			throw new IncompleteDataException("Shooter Data are incomplete: Missing Email");
+			throw new IncompleteDataException(cErrorMessage1);
 		}
 		if (shootersRepository.findShooterByEmail(in.getEmail().toLowerCase()).isPresent()) {
 			throw new IncompleteDataException("There is already a shooter with email address <" + in.getEmail() + ">");
@@ -163,7 +186,7 @@ public class ShootersController extends AbstractIpscController<Shooter> {
 
 		// some tests
 		if (in.getEmail() == null || in.getEmail().isEmpty()) {
-			throw new IncompleteDataException("Shooter Data are incomplete: Missing Email");
+			throw new IncompleteDataException(cErrorMessage1);
 		}
 
 		Optional<Shooter> out = shootersRepository.findShooterByEmail(in.getEmail().toLowerCase());

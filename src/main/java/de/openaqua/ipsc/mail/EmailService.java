@@ -107,4 +107,15 @@ public class EmailService {
 		send(email);
 	}
 
+	public void sendPasswordResetMail(final String to) {
+		log.info("sendPasswordResetMail to <{}>", to);
+		// TODO: needs to be defined...
+		String from = "test@localhost.com";
+		String subject = "Neu-Registrierung";
+
+		Email email = new Email(from, to, subject, "Hallo, vergesslicher schütze");
+		email.setHtml(true);
+		send(email);
+	}
+
 }

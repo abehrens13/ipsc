@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import de.openaqua.ipsc.entities.Club;
 import de.openaqua.ipsc.reps.ClubsRepository;
 import de.openaqua.ipsc.reps.CompetitionRepository;
 import de.openaqua.ipsc.reps.RegistrationsRepository;
@@ -45,6 +44,7 @@ public class SampleCreator {
 	}
 
 	public void createSampleClubs() {
+		// for later
 
 	}
 

@@ -1,7 +1,5 @@
 package de.openaqua.ipsc.restcontroller;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,9 +41,12 @@ import de.openaqua.ipsc.entities.IDocument;
  * 
  */
 public abstract class AbstractIpscController<T extends IDocument> {
-	Logger log = LoggerFactory.getLogger(AbstractIpscController.class);
+	private Logger log = LoggerFactory.getLogger(AbstractIpscController.class);
 
 	protected T voidtestObjectId(final String id, final T c) {
+		if (id == null || c == null || c.getId() == null) {
+			throw new ResourceNotFoundException("illegal parameters for " + id);
+		}
 		if (!c.getId().equals(id)) {
 			throw new ResourceNotFoundException("id doesnt match object id " + id);
 		}
@@ -80,7 +81,7 @@ public abstract class AbstractIpscController<T extends IDocument> {
 	 * @param c
 	 * @return
 	 */
-	@PutMapping("/")
+	@PutMapping()
 	@Transactional
 	public ResponseEntity<T> put(final @Valid @RequestBody T c) {
 		log.info("PUT new Object");
