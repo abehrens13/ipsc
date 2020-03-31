@@ -1,0 +1,19 @@
+language: java
+sudo: required
+
+services:
+ 	- docker
+
+before_install:
+	- docker build -t openaqua/backend -f Dockerfile
+	
+deploy:
+	provider: elasticbeanstalk
+	region: "us-east-2"
+	app: "backend"
+	evn: "Backend-env"
+	bucket_name: "elasticbeanstalk-us-east-2-050799799876"
+	bucket_path: "backend"
+	on:
+			branch: master
+			
