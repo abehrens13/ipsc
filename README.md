@@ -17,7 +17,7 @@ mvn docker:start
 mvn docker:stop
 
 
-##TODO
+## TODO
   - unit tests for travis-ci
   - initial database setup with meaningful test data
   - email setup with email templates
