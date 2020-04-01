@@ -2,9 +2,6 @@ language: java
 sudo: required
 services:
 - docker
-before_install:
-- mvn clean package
-- docker build -t openaqua/backend:LATEST .
 deploy:
   provider: elasticbeanstalk
   access_key_id: $AWS_ACCESS_KEY
