@@ -2,16 +2,6 @@ language: java
 sudo: required
 services:
 - docker
-deploy:
-  edge: true
-  provider: elasticbeanstalk
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: "$AWS_SECRET_KEY"
-  region: us-east-2
-  app: backend
-  env: Backend-env
-  bucket_name: elasticbeanstalk-us-east-2-050799799876
-  bucket_path: backend
 after_success:
 - docker build -t "$DOCKER_ID"/backend .
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
