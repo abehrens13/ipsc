@@ -3,7 +3,7 @@ sudo: required
 services:
 - docker
 before_install:
-- docker build -t openaqua/backend -f Dockerfile
+- docker build -t openaqua/backend:LATEST .
 deploy:
   provider: elasticbeanstalk
   access_key_id: $AWS_ACCESS_KEY
