@@ -3,10 +3,10 @@ sudo: required
 services:
 - docker
 deploy:
+  edge: true
   provider: elasticbeanstalk
   access_key_id: $AWS_ACCESS_KEY
-  secret_access_key:
-    secure: "$AWS_SECRET_KEY"
+  secret_access_key: "$AWS_SECRET_KEY"
   region: us-east-2
   app: backend
   env: Backend-env
