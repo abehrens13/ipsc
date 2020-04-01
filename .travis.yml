@@ -4,6 +4,6 @@ services:
 - docker
 after_success:
  - if [ "$TRAVIS_BRANCH" == "master" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin; docker push registry_url/backend:travis-$TRAVIS_BUILD_NUMBER; fi
--otifications:
+notifications:
   email: true
   
