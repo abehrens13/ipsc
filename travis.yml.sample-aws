@@ -12,10 +12,5 @@ deploy:
   env: Backend-env
   bucket_name: elasticbeanstalk-us-east-2-050799799876
   bucket_path: backend
-after_success:
-- docker build -t openaqua/backend .
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-- docker push openaqua/backend
 notifications:
   email: true
-  
