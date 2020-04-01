@@ -22,3 +22,4 @@ mvn docker:stop
   - initial database setup with meaningful test data
   - email setup with email templates
   - mechanism for login and safety
+  - deployment for AWS
