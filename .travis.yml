@@ -3,9 +3,9 @@ sudo: required
 services:
 - docker
 after_success:
-- docker build -t "$DOCKER_ID"/backend .
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-- docker push "$DOCKER_ID"/backend
+- docker build -t $DOCKER_ID/backend .
+- echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin
+- docker push $DOCKER_ID/backend
 notifications:
   email: true
   
