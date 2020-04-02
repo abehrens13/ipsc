@@ -6,14 +6,16 @@
 			"image": "mongo",
 			"hostname": "mongo",
 			"essential": true,
-			"memory": 512
+			"memory": null,
+			"memoryReservation": 128
 		},
 		{
 			"name": "backend",
 			"image": "feb18/backend",
 			"hostname": "backend",
 			"essential": true,
-			"memory": 512,
+			"memory": null,
+			"memoryReservation": 128,
 			"portMappings": [
 				{
 					"hostPort": 80,
