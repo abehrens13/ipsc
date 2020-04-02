@@ -1,0 +1,66 @@
+{
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [
+		{
+			"name": "mongo",
+			"image": "mongo:latest",
+			"hostname": "mongo",
+			"essential": true
+		},
+		{
+			"name": "mongo-express",
+			"image": "mongo-express",
+			"hostname": "mongoexpress",
+			"essential": false,
+			"portMappings": [
+				{
+					"hostPort": 4001,
+					"containerPort": 8081
+				}
+			],
+			"links": [
+				"mongo"
+			]
+		},
+		{
+			"name": "mongoclient/mongoclient",
+			"image": "mongoclient/mongoclient:latest",
+			"hostname": "mongoclient",
+			"essential": false,
+			"portMappings": [
+				{
+					"hostPort": 4000,
+					"containerPort": 3000
+				}
+			],
+			"links": [
+				"mongo"
+			],
+			"environment": [
+				{
+					"name": "MONGO_URL",
+					"value": "mongodb://mongo:27017/mydb"
+				},
+				{
+					"name": "MONGOCLIENT_DEFAULT_CONNECTION_URL",
+					"value": "mongodb://mongo:27017/mydb"
+				}
+			]
+		},
+		{
+			"name": "backend",
+			"image": "feb18/backend:latest",
+			"hostname": "backend",
+			"essential": true,
+			"portMappings": [
+				{
+					"hostPort": 8080,
+					"containerPort": 8080
+				}
+			],
+			"links": [
+				"mongo"
+			]
+		}
+	]
+}
