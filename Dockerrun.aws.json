@@ -5,13 +5,15 @@
 			"name": "mongo",
 			"image": "mongo",
 			"hostname": "mongo",
-			"essential": true
+			"essential": true,
+			"memory": 512
 		},
 		{
 			"name": "mongoexpress",
 			"image": "mongo-express",
 			"hostname": "mongoexpress",
 			"essential": false,
+			"memory": 512,
 			"portMappings": [
 				{
 					"hostPort": 4001,
@@ -27,6 +29,7 @@
 			"image": "mongoclient/mongoclient",
 			"hostname": "mongoclient",
 			"essential": false,
+			"memory": 512,
 			"portMappings": [
 				{
 					"hostPort": 4000,
@@ -52,6 +55,7 @@
 			"image": "feb18/backend",
 			"hostname": "backend",
 			"essential": true,
+			"memory": 512,
 			"portMappings": [
 				{
 					"hostPort": 80,
