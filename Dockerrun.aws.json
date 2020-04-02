@@ -9,48 +9,6 @@
 			"memory": 512
 		},
 		{
-			"name": "mongoexpress",
-			"image": "mongo-express",
-			"hostname": "mongoexpress",
-			"essential": false,
-			"memory": 512,
-			"portMappings": [
-				{
-					"hostPort": 4001,
-					"containerPort": 8081
-				}
-			],
-			"links": [
-				"mongo"
-			]
-		},
-		{
-			"name": "mongoclient",
-			"image": "mongoclient/mongoclient",
-			"hostname": "mongoclient",
-			"essential": false,
-			"memory": 512,
-			"portMappings": [
-				{
-					"hostPort": 4000,
-					"containerPort": 3000
-				}
-			],
-			"links": [
-				"mongo"
-			],
-			"environment": [
-				{
-					"name": "MONGO_URL",
-					"value": "mongodb://mongo:27017/mydb"
-				},
-				{
-					"name": "MONGOCLIENT_DEFAULT_CONNECTION_URL",
-					"value": "mongodb://mongo:27017/mydb"
-				}
-			]
-		},
-		{
 			"name": "backend",
 			"image": "feb18/backend",
 			"hostname": "backend",
