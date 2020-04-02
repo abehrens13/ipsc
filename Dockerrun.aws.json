@@ -3,12 +3,12 @@
 	"containerDefinitions": [
 		{
 			"name": "mongo",
-			"image": "mongo:latest",
+			"image": "mongo",
 			"hostname": "mongo",
 			"essential": true
 		},
 		{
-			"name": "mongo-express",
+			"name": "mongoexpress",
 			"image": "mongo-express",
 			"hostname": "mongoexpress",
 			"essential": false,
@@ -23,8 +23,8 @@
 			]
 		},
 		{
-			"name": "mongoclient/mongoclient",
-			"image": "mongoclient/mongoclient:latest",
+			"name": "mongoclient",
+			"image": "mongoclient/mongoclient",
 			"hostname": "mongoclient",
 			"essential": false,
 			"portMappings": [
@@ -49,7 +49,7 @@
 		},
 		{
 			"name": "backend",
-			"image": "feb18/backend:latest",
+			"image": "feb18/backend",
 			"hostname": "backend",
 			"essential": true,
 			"portMappings": [
