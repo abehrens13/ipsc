@@ -12,7 +12,7 @@
 		{
 			"name": "mongoexpress",
 			"image": "mongo-express",
-			"hostname": "mongo",
+			"hostname": "mongoex",
 			"essential": true,
 			"memory": null,
 			"memoryReservation": 128,
