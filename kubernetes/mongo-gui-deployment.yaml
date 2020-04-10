@@ -17,5 +17,8 @@ spec:
         image: mongoclient/mongoclient
         ports:
         - containerPort: 3000
-        MONGO_URL: mongodb://mongo:27017/mydb
-      MONGOCLIENT_DEFAULT_CONNECTION_URL: mongodb://mongo:27017/mydb
+        env:
+        - name: MONGO_URL
+          value: mongodb://mongo-service:27017/mydb
+        - name: MONGOCLIENT_DEFAULT_CONNECTION_URL
+          value: mongodb://mongo-service:27017/mydb
