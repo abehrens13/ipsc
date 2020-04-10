@@ -19,6 +19,6 @@ spec:
         - containerPort: 3000
         env:
         - name: MONGO_URL
-          value: mongodb://mongo-service:27017/mydb
+          value: mongodb://mongo-service:27017/ipsc_db
         - name: MONGOCLIENT_DEFAULT_CONNECTION_URL
-          value: mongodb://mongo-service:27017/mydb
+          value: mongodb://mongo-service:27017/ipsc_db

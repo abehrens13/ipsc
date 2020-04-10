@@ -4,5 +4,6 @@ services:
 - docker
 after_success:
 - docker build -t "$DOCKER_ID"/backend:travis-$TRAVIS_BUILD_NUMBER .
+- docker build -t "$DOCKER_ID"/backend:latest .
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin; docker push "$DOCKER_ID"/backend:travis-$TRAVIS_BUILD_NUMBER
 - if [ "$TRAVIS_BRANCH" == "master" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin; docker push "$DOCKER_ID"/backend:latest; fi

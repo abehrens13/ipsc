@@ -17,3 +17,10 @@ spec:
         image: feb18/backend
         ports:
         - containerPort: 8080
+        env:
+        - name: MONGODB_DATABASE
+          value: ipsc_db
+        - name: MONGODB_PORT
+          value: 27017
+        - name: MONGODB_HOST
+          value: mongo-service
