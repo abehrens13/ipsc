@@ -4,15 +4,5 @@ services:
 - docker
 after_success:
 - docker build -t "$DOCKER_ID"/backend:travis-$TRAVIS_BUILD_NUMBER .
-- if [ "$TRAVIS_BRANCH" == "master" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin; docker push "$DOCKER_ID"/backend:travis-$TRAVIS_BUILD_NUMBER; fi
-deploy:
-  provider: elasticbeanstalk
-  access_key_id: $AWS_MULTI_ACCESS_KEY
-  secret_access_key: "$AWS_MULTI_SECRET_KEY"
-  region: us-east-2
-  app: backend3
-  env: Backend3-env
-  bucket_name: elasticbeanstalk-us-east-2-050799799876
-  bucket_path: multi_backend
-  true:
-    branch: master
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin; docker push "$DOCKER_ID"/backend:travis-$TRAVIS_BUILD_NUMBER
+- if [ "$TRAVIS_BRANCH" == "master" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin; docker push "$DOCKER_ID"/backend:latest; fi
