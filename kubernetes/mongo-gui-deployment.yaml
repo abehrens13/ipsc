@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: mongo-gui-deployment
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       component: mongogui
@@ -17,3 +17,5 @@ spec:
         image: mongoclient/mongoclient
         ports:
         - containerPort: 3000
+        MONGO_URL: mongodb://mongo:27017/mydb
+      MONGOCLIENT_DEFAULT_CONNECTION_URL: mongodb://mongo:27017/mydb

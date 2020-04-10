@@ -13,8 +13,16 @@ spec:
         component: mongo
         environment: dev
     spec:
+      volumes:
+      - name: mongo-storage
+        persistentVolumeClaim:
+          claimName: persist-mongo-volume-claim
       containers:
       - name: mongo
         image: mongo
         ports:
         - containerPort: 27017
+        volumeMounts:
+        - name: mongo-storage
+          mountPath: /var/lib/mongodb/data
+          subPath: mongodb
