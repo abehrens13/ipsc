@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-gui-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mongogui
+  template:
+    metadata:
+      labels:
+        component: mongogui
+    spec:
+      containers:
+      - name: mongoclient
+        image: mongoclient/mongoclient
+        ports:
+        - containerPort: 3000
