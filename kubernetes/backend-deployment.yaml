@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: backend-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       component: backend
@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
       - name: backend
-        image: feb18/backend
+        image: feb18/backend:travis-40
         ports:
         - containerPort: 8080
         env:
-        - name: MONGODB_DATABASE
+        - name: spring_data_mongodb_database
           value: ipsc_db
-        - name: MONGODB_PORT
-          value: 27017
-        - name: MONGODB_HOST
+        - name: spring_data_mongodb_host
           value: mongo-service
+        - name: spring_data_mongodb_port
+          value: '27017'

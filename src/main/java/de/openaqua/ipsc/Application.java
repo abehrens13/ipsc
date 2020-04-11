@@ -11,6 +11,16 @@ public class Application {
 
 	public static void main(String... args) {
 		LOG.debug("Application::main()");
-		SpringApplication.run(Application.class, args);
+
+		SpringApplication application = new SpringApplication(Application.class);
+
+		/*
+		 * Properties properties = application.getSources().
+		 * properties.put("server.port", 9999);
+		 * application.setDefaultProperties(properties);
+		 */
+
+		application.run(args);
+
 	}
 }
