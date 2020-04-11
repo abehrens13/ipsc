@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: feb18/backend:travis-40
+        image: feb18/backend:dev
         ports:
         - containerPort: 8080
         env:
