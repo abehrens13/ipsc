@@ -3,9 +3,9 @@ sudo: required
 services:
 - docker
 after_success:
-- docker build -t "$DOCKER_ID"/backend:travis-$TRAVIS_BUILD_NUMBER .
-- docker build -t "$DOCKER_ID"/backend:latest .
-- docker build -t "$DOCKER_ID"/backend:dev .
+- if [ "$TRAVIS_BRANCH" == "master" ]; then docker build -t "$DOCKER_ID"/backend:travis-$TRAVIS_BUILD_NUMBER . ; fi
+- if [ "$TRAVIS_BRANCH" == "master" ]; then docker build -t "$DOCKER_ID"/backend:latest . ; fi
+- if [ "$TRAVIS_BRANCH" != "master" ]; then docker build -t "$DOCKER_ID"/backend:latest-dev . ; fi
 - if [ "$TRAVIS_BRANCH" == "master" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin; docker push "$DOCKER_ID"/backend:travis-$TRAVIS_BUILD_NUMBER; fi
 - if [ "$TRAVIS_BRANCH" == "master" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin; docker push "$DOCKER_ID"/backend:latest; fi
-- if [ "$TRAVIS_BRANCH" != "master" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin; docker push "$DOCKER_ID"/backend:dev; fi
+- if [ "$TRAVIS_BRANCH" != "master" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin; docker push "$DOCKER_ID"/backend:latest-dev; fi
