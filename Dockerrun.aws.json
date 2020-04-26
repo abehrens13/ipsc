@@ -28,7 +28,7 @@
 		},
 		{
 			"name": "backend",
-			"image": "feb18/backend",
+			"image": "feb18/backend:latest-dev",
 			"hostname": "backend",
 			"essential": true,
 			"memory": null,
