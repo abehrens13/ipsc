@@ -1,26 +1,17 @@
 package de.openaqua.ipsc;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Application {
-	private static final Log LOG = LogFactory.getLog(Application.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
 	public static void main(String... args) {
 		LOG.debug("Application::main()");
-
 		SpringApplication application = new SpringApplication(Application.class);
-
-		/*
-		 * Properties properties = application.getSources().
-		 * properties.put("server.port", 9999);
-		 * application.setDefaultProperties(properties);
-		 */
-
 		application.run(args);
 
 	}
